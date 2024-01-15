@@ -2,6 +2,7 @@ package com.cjpm.gestorcoches.services;
 
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
+import com.cjpm.gestorcoches.repository.CocheHibridoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,38 +14,32 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
     //Atributos
     private CocheFactoryImp cocheFactory = new CocheFactoryImp();
 
-    //Constructores
-    public CocheHibridoServiceImp() {
-    }
-
-    public CocheHibridoServiceImp(CocheFactoryImp cocheFactory) {
-        this.cocheFactory = cocheFactory;
-    }
-
-
-    //Getters y Setters
-    public CocheFactoryImp getCocheFactory() {
-        return cocheFactory;
-    }
-
-    public void setCocheFactory(CocheFactoryImp cocheFactory) {
-        this.cocheFactory = cocheFactory;
-    }
+    private CocheHibridoRepository cocheHibridoRepository;
 
     //Funciones
         // Crear coche híbrido nuevo
+
+
     @Override
-    public CocheHibrido saveCocheHibrido() {return (CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO);
+    public CocheHibrido saveCocheHibrido() {
+        return cocheHibridoRepository.save((CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO));
     }
-        // Mostrar listado de coches híbridos
+
+    // Mostrar listado de coches híbridos
     @Override
     public List<CocheHibrido> findAllCocheHibrido() {
-        return null;
+
+        return cocheHibridoRepository.findAll();
     }
 
         // Muestra coche híbrido determinado
     @Override
     public Optional<CocheHibrido> findCocheHibridoById(Long id) {
-        return null;
+
+        if(id==null || id<=0){
+            return Optional.empty();
+        }
+        return cocheHibridoRepository.findById(id);
+
     }
 }

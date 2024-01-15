@@ -34,14 +34,15 @@ public class CocheElectricoController {
      * @return CocheElectricoDTO
      */
     @GetMapping("/coches_electricos")
-    public List<CocheElectrico> findAll(){
-        List<CocheElectricoDTO> listaCochesElectricos = cocheElectricoService.getAllCocheElectrico();
+    public List<CocheElectricoDTO> findAll(){
+        List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
 
         return listaCochesElectricos.stream()
-                .map(this::convertToDto)
+                .map(this::convertCocheElectricotoDTO)
                 .collect(Collectors.toList());
 
     }
+
 
     /**
      * Devuelve el coche eléctrico que solicita el cliente
@@ -49,14 +50,24 @@ public class CocheElectricoController {
      * @return CocheElectricoDTO
      */
     @GetMapping("/coches_electricos/{id}")
-    public ResponseEntity<CocheElectrico> findById(@PathVariable long id){
-        return null;
+    public ResponseEntity<CocheElectricoDTO> findCocheElectricoById(@PathVariable Long id){
+        return convertCocheElectricotoDTO(cocheElectricoService.findCocheElectricoById(id));
     }
 
 
+    private CocheElectricoDTO convertCocheElectricotoDTO(CocheElectrico cocheElectrico){
+        CocheElectricoDTO cocheElectricoDTO = modelMapper.map(cocheElectrico, CocheElectricoDTO.class);
+        return cocheElectricoDTO;
+    }
 
-
-
+/**
+ * private PostDto convertToDto(Post post) {
+ *     PostDto postDto = modelMapper.map(post, PostDto.class);
+ *     postDto.setSubmissionDate(post.getSubmissionDate(),
+ *         userService.getCurrentUser().getPreference().getTimezone());
+ *     return postDto;
+ * }
+ */
 
 
 
