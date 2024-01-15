@@ -1,6 +1,7 @@
 package com.cjpm.gestorcoches.factory;
 
-import com.cjpm.gestorcoches.dto.CocheDTO;
+
+import com.cjpm.gestorcoches.entities.Coche;
 import com.cjpm.gestorcoches.facade.CocheFacadeImp;
 
 public class CocheFactoryImp implements ICocheFactory {
@@ -12,7 +13,7 @@ public class CocheFactoryImp implements ICocheFactory {
      * @param type
      *
      */
-    public CocheDTO creadorAutomovil(CocheType type){
+    public Coche creadorAutomovil(CocheType type){
 
         switch(type){
             case COCHE_COMBUSTION:

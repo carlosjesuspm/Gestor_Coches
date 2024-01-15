@@ -4,6 +4,7 @@ import com.cjpm.gestorcoches.entities.CocheCombustion;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.cjpm.gestorcoches.factory.CocheType.COCHE_COMBUSTION;
 
@@ -32,20 +33,22 @@ public class CocheCombustionServiceImp implements ICocheCombustionService{
 
     //Funciones
         //Crear coche
-    public void crearCocheCombustion() {
-        cocheFactory.creadorAutomovil(COCHE_COMBUSTION);
+    public CocheCombustion saveCocheCombustion() {
+        return (CocheCombustion) cocheFactory.creadorAutomovil(COCHE_COMBUSTION);
     }
 
 
         // Mostrar todos los coches de Combustión
     @Override
-    public List<CocheCombustion> getAllCocheCombustion() {
+    public List<CocheCombustion> findAllCocheCombustion() {
         return null;
     }
 
         // Obtener determinado coche de combustión
     @Override
-    public CocheCombustion getCocheCombustionById(long id) {
+    public Optional<CocheCombustion> findCocheCombustionById(Long id) {
         return null;
     }
+
+
 }

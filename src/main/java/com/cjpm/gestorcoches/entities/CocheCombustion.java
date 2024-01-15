@@ -16,6 +16,9 @@ public class CocheCombustion extends Coche  {
     @Column(name = "motor_combustion")
     private boolean motorCombustion;
 
+    public CocheCombustion() {
+    }
+
     public CocheCombustion(long idCocheCombustion, boolean motorCombustion) {
         this.idCocheCombustion = idCocheCombustion;
         this.motorCombustion = motorCombustion;

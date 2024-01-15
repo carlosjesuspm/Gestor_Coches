@@ -15,6 +15,9 @@ public class CocheHibrido extends Coche {
     @Column(name = "tanque_hidrogeno")
     private boolean tanqueHidrogeno;
 
+    public CocheHibrido() {
+    }
+
     public CocheHibrido(long idCocheHibrido, boolean tanqueHidrogeno) {
         this.idCocheHibrido = idCocheHibrido;
         this.tanqueHidrogeno = tanqueHidrogeno;

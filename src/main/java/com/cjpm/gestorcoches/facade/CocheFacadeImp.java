@@ -1,7 +1,8 @@
 package com.cjpm.gestorcoches.facade;
 
-import com.cjpm.gestorcoches.dto.CocheCombustionDTO;
-import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
+import com.cjpm.gestorcoches.entities.CocheCombustion;
+import com.cjpm.gestorcoches.entities.CocheElectrico;
+import com.cjpm.gestorcoches.entities.CocheHibrido;
 
 /**
  * Clase Fachada que permite crear el objeto con todos sus componentes
@@ -13,9 +14,9 @@ public class CocheFacadeImp implements ICocheFacade{
      * @return cocheElectrico
      */
 
-    public CocheElectricoDTO montarCocheElectrico() {
+    public CocheElectrico montarCocheElectrico() {
 
-        CocheElectricoDTO cocheElectrico = new CocheElectricoDTO();
+        CocheElectrico cocheElectrico = new CocheElectrico();
         cocheElectrico.encederBateria();
         cocheElectrico.encenderMotor();
         cocheElectrico.encenderAireAcondicionado();
@@ -41,8 +42,8 @@ public class CocheFacadeImp implements ICocheFacade{
      * Método encargado de crear Coche Combustión
      * @return cocheCombustión
      */
-    public CocheCombustionDTO montarCocheCombustion() {
-        CocheCombustionDTO cocheCombustion = new CocheCombustionDTO();
+    public CocheCombustion montarCocheCombustion() {
+        CocheCombustion cocheCombustion = new CocheCombustion();
 
         cocheCombustion.encederBateria();
         cocheCombustion.encenderMotor();

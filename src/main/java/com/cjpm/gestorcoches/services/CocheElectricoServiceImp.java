@@ -1,6 +1,7 @@
 package com.cjpm.gestorcoches.services;
 
 
+import com.cjpm.gestorcoches.entities.CocheElectrico;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 
@@ -36,17 +37,17 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     //Funciones
     // Crear coche eléctrico nuevo
-    public CocheHibrido saveCocheElectrico() { cocheFactory.creadorAutomovil(COCHE_ELECTRICO);
+    public CocheElectrico saveCocheElectrico() { return (CocheElectrico)cocheFactory.creadorAutomovil(COCHE_ELECTRICO);
     }
     // Mostrar listado de coches eléctrico
 
-    public List<CocheHibrido> findAllCocheElectrico() {
+    public List<CocheElectrico> findAllCocheElectrico() {
         return null;
     }
 
     // Muestra coche eléctrico determinado
 
-    public Optional<CocheHibrido> findCocheHibridoById(Long id) {
+    public Optional<CocheElectrico> findCocheElectricoById(Long id) {
         return null;
     }
 

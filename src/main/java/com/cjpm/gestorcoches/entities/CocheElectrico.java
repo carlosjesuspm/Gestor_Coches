@@ -14,6 +14,9 @@ public class CocheElectrico extends Coche {
     @Column(name = "bateria_electrica")
     private boolean bateriaElectrica;
 
+    public CocheElectrico() {
+    }
+
     public CocheElectrico(long idCocheElectrico, boolean bateriaElectrica) {
         this.idCocheElectrico = idCocheElectrico;
         this.bateriaElectrica = bateriaElectrica;

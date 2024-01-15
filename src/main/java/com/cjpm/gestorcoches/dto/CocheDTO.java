@@ -1,6 +1,10 @@
 package com.cjpm.gestorcoches.dto;
 
-public abstract class CocheDTO implements IFuncionesCoche {
+
+
+import java.io.Serializable;
+
+public abstract class CocheDTO implements Serializable {
 
 
     //Atributos
@@ -106,14 +110,5 @@ public abstract class CocheDTO implements IFuncionesCoche {
                 '}';
     }
 
-    //Funciones Coche
-    public boolean encenderAireAcondicionado(){
-        return aireAcondicionado=true;
-    };
-    public boolean encederBateria(){
-        return bateria=true;
-    };
-    public boolean encenderMotor(){
-        return motor=true;
-    };
+
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="coches")
-public abstract class Coche implements Serializable {
+public abstract class Coche implements IFuncionesCoche{
 
 
     //Atributos
@@ -99,6 +99,17 @@ public abstract class Coche implements Serializable {
     public void setBateria(Boolean bateria) {
         this.bateria = bateria;
     }
+
+    //Funciones Coche
+    public boolean encenderAireAcondicionado(){
+        return aireAcondicionado=true;
+    };
+    public boolean encederBateria(){
+        return bateria=true;
+    };
+    public boolean encenderMotor(){
+        return motor=true;
+    };
 
 }
 

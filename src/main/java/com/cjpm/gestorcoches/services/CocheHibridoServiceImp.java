@@ -4,6 +4,7 @@ import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.cjpm.gestorcoches.factory.CocheType.COCHE_HIBRIDO;
 
@@ -33,17 +34,17 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
     //Funciones
         // Crear coche híbrido nuevo
     @Override
-    public void crearCocheHibrido() {cocheFactory.creadorAutomovil(COCHE_HIBRIDO);
+    public CocheHibrido saveCocheHibrido() {return (CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO);
     }
         // Mostrar listado de coches híbridos
     @Override
-    public List<CocheHibrido> getAllCocheHibrido() {
+    public List<CocheHibrido> findAllCocheHibrido() {
         return null;
     }
 
         // Muestra coche híbrido determinado
     @Override
-    public CocheHibrido getCocheHibridoById(long id) {
+    public Optional<CocheHibrido> findCocheHibridoById(Long id) {
         return null;
     }
 }
