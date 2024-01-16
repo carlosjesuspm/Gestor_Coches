@@ -6,12 +6,11 @@ import com.cjpm.gestorcoches.services.CocheElectricoServiceImp;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -50,8 +49,39 @@ public class CocheElectricoController {
      * @return CocheElectricoDTO
      */
     @GetMapping("/coches_electricos/{id}")
-    public ResponseEntity<CocheElectricoDTO> findCocheElectricoById(@PathVariable Long id){
-        return convertCocheElectricotoDTO(cocheElectricoService.findCocheElectricoById(id));
+    public ResponseEntity<CocheElectricoDTO> findById(@PathVariable Long id){
+        Optional<CocheElectrico> cocheElectricoOpt= cocheElectricoService.findCocheElectricoById(id);
+
+        return cocheElectricoOpt.map(cocheElectrico -> {
+                    CocheElectricoDTO cocheElectricoDTO = new CocheElectricoDTO();
+                    cocheElectricoDTO.setIdCoche(cocheElectrico.getIdCoche());
+                    cocheElectricoDTO.setIdCocheElectrico(cocheElectrico.getIdCocheElectrico());
+                    cocheElectricoDTO.setBateriaElectrica(cocheElectrico.isBateriaElectrica());
+                    cocheElectricoDTO.setMarca(cocheElectrico.getMarca());
+                    cocheElectricoDTO.setBateria(cocheElectrico.getBateria());
+                    cocheElectricoDTO.setModelo(cocheElectrico.getModelo());
+                    cocheElectricoDTO.setColor(cocheElectrico.getColor());
+                    cocheElectricoDTO.setAireAcondicionado(cocheElectrico.getAireAcondicionado());
+                    cocheElectricoDTO.setMotor(cocheElectrico.getMotor());
+
+                    return ResponseEntity.ok(cocheElectricoDTO);
+
+                }).orElseGet(()-> ResponseEntity.notFound().build());
+
+
+    }
+
+    @PostMapping("/coches_electricos/save")
+    public ResponseEntity<CocheElectricoDTO> create(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
+
+        CocheElectrico cocheElectrico = convertCocheElectricoDTOToEntity(cocheElectricoDTO);
+        cocheElectricoService.saveCocheElectrico(cocheElectrico);
+
+        if(cocheElectrico.getIdCocheElectrico() !=1L){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(convertCocheElectricotoDTO(cocheElectrico));
+
     }
 
 
@@ -60,14 +90,11 @@ public class CocheElectricoController {
         return cocheElectricoDTO;
     }
 
-/**
- * private PostDto convertToDto(Post post) {
- *     PostDto postDto = modelMapper.map(post, PostDto.class);
- *     postDto.setSubmissionDate(post.getSubmissionDate(),
- *         userService.getCurrentUser().getPreference().getTimezone());
- *     return postDto;
- * }
- */
+    private CocheElectrico convertCocheElectricoDTOToEntity(CocheElectricoDTO cocheElectricoDTO) throws ParseException{
+        CocheElectrico cocheElectrico = modelMapper.map(cocheElectricoDTO, CocheElectrico.class);
+
+        return cocheElectrico;
+    }
 
 
 

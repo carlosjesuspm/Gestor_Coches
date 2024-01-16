@@ -20,8 +20,8 @@ public class CocheCombustionServiceImp implements ICocheCombustionService{
 
     //Funciones
         //Crear coche
-    public CocheCombustion saveCocheCombustion() {
-        return cocheCombustionRepository.save((CocheCombustion) cocheFactory.creadorAutomovil(COCHE_COMBUSTION));
+    public void saveCocheCombustion(CocheFactoryImp cocheFactory) {
+        cocheCombustionRepository.save((CocheCombustion) cocheFactory.creadorAutomovil(COCHE_COMBUSTION));
     }
 
 
@@ -38,9 +38,12 @@ public class CocheCombustionServiceImp implements ICocheCombustionService{
         if(id==null || id<=0){
             return Optional.empty();
         }
-        return cocheCombustionRepository.findById(id);
+        return Optional.of(cocheCombustionRepository.findById(id).get());
 
     }
 
-
+    @Override
+    public void deleteCocheCombustion(CocheCombustion cocheCombustion) {
+        cocheCombustionRepository.delete(cocheCombustion);
+    }
 }

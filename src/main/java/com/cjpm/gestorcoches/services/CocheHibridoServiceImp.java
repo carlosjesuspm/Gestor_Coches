@@ -21,8 +21,8 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
 
 
     @Override
-    public CocheHibrido saveCocheHibrido() {
-        return cocheHibridoRepository.save((CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO));
+    public void saveCocheHibrido(CocheFactoryImp cocheFactory) {
+        cocheHibridoRepository.save((CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO));
     }
 
     // Mostrar listado de coches híbridos
@@ -39,7 +39,12 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
         if(id==null || id<=0){
             return Optional.empty();
         }
-        return cocheHibridoRepository.findById(id);
+        return Optional.of(cocheHibridoRepository.findById(id).get());
 
+    }
+
+    @Override
+    public void deleteCocheHibrido(CocheHibrido cocheHibrido) {
+        cocheHibridoRepository.delete(cocheHibrido);
     }
 }
