@@ -2,7 +2,6 @@ package com.cjpm.gestorcoches.services;
 
 
 import com.cjpm.gestorcoches.entities.CocheElectrico;
-import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.repository.CocheElectricoRepository;
 
@@ -77,7 +76,7 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     @Override
     public boolean deleteCocheElectricoById(Long id) {
-        if(id==null ||!cocheElectricoRepository.existsById(id)){
+        if(id==null || !cocheElectricoRepository.existsById(id)){
             return false;
         }
         cocheElectricoRepository.deleteById(id);
