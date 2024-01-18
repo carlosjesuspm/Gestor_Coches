@@ -3,17 +3,21 @@ package com.cjpm.gestorcoches.services;
 import com.cjpm.gestorcoches.entities.CocheCombustion;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.repository.CocheCombustionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 import static com.cjpm.gestorcoches.factory.CocheType.COCHE_COMBUSTION;
 
+@Service
 public class CocheCombustionServiceImp implements ICocheCombustionService{
 
     //Atributo
     private CocheFactoryImp cocheFactory = new CocheFactoryImp();
 
+    @Autowired
     private CocheCombustionRepository cocheCombustionRepository;
 
 

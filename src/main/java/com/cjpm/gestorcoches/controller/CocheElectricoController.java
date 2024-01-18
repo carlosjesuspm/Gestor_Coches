@@ -20,13 +20,18 @@ public class CocheElectricoController {
      * Inyección de las dependencias
      */
 
-    @Autowired
-    private final CocheElectricoServiceImp cocheElectricoService = new CocheElectricoServiceImp();
 
-    @Autowired
+    private final CocheElectricoServiceImp cocheElectricoService;
+
+
     private ModelMapper modelMapper;
 
 
+    @Autowired
+    public CocheElectricoController(CocheElectricoServiceImp cocheElectricoService, ModelMapper modelMapper) {
+        this.cocheElectricoService = cocheElectricoService;
+        this.modelMapper = modelMapper;
+    }
 
     /**
      * Devuelve todos los coches eléctricos
@@ -37,7 +42,7 @@ public class CocheElectricoController {
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
 
         return listaCochesElectricos.stream()
-                .map(this::convertCocheElectricotoDTO)
+                .map(this::convertCocheElectricoToDTO)
                 .collect(Collectors.toList());
 
     }
@@ -47,7 +52,7 @@ public class CocheElectricoController {
      * Devuelve el coche eléctrico que solicita el cliente
      * @return CocheElectricoDTO
      */
-    @GetMapping("/coche_electrico/{id}")
+    @GetMapping("/coches_electricos/{id}")
     public ResponseEntity<CocheElectricoDTO> findById(@PathVariable Long id){
         Optional<CocheElectrico> cocheElectricoOpt= cocheElectricoService.findCocheElectricoById(id);
 
@@ -75,32 +80,44 @@ public class CocheElectricoController {
      * @return ResponseEntity
      */
 
-    @PostMapping("/save")
+    @PostMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> saveCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
 
         CocheElectrico cocheElectrico = convertCocheElectricoDTOToEntity(cocheElectricoDTO);
-        cocheElectricoService.saveCocheElectrico(cocheElectrico);
-
         if(cocheElectrico.getIdCocheElectrico() !=1L){
-            return ResponseEntity.badRequest().build();
+            throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
         }
-        return ResponseEntity.ok(convertCocheElectricotoDTO(cocheElectrico));
+        cocheElectricoService.saveCocheElectrico(cocheElectrico);
+        return ResponseEntity.ok(convertCocheElectricoToDTO(cocheElectrico));
 
     }
 
+    /**
+     * Actualizar coche eléctrico
+     * @param cocheElectricoDTO
+     * @return ResponseEntity<CocheElectrico>
+     * @throws ParseException
+     */
     @PutMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> updateCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
         if(cocheElectricoDTO.getIdCocheElectrico()!=1L){
-            return ResponseEntity.badRequest().build();
+            throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
         }
+
         CocheElectrico cocheElectrico = convertCocheElectricoDTOToEntity(cocheElectricoDTO);
         cocheElectricoService.saveCocheElectrico(cocheElectrico);
-        return ResponseEntity.ok(convertCocheElectricotoDTO(cocheElectrico));
+        return ResponseEntity.ok(convertCocheElectricoToDTO(cocheElectrico));
     }
 
-    //Eliminar coche eléctrico
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void>deleteCocheElectrico(@PathVariable Long id){
+    //Eliminar coche eléctrico determinado
+
+    /**
+     * Eliminar coche eléctrico determinado
+     * @param id
+     * @return ResponseEntity<CocheElectrico>
+     */
+    @DeleteMapping("/coches_electricos/{id}")
+    public ResponseEntity<CocheElectrico>deleteCocheElectrico(@PathVariable Long id){
         boolean result= cocheElectricoService.deleteCocheElectricoById(id);
         if(result){
             return ResponseEntity.noContent().build();
@@ -108,13 +125,27 @@ public class CocheElectricoController {
         return ResponseEntity.internalServerError().build();
     }
 
+    /**
+     * Borrar todos los coches eléctricos
+     * @return ResponseEntity<CocheElectrico>
+     */
+    @DeleteMapping("/coches_electricos")
+    public ResponseEntity<CocheElectrico>deleteAllCocheElectrico(){
+        boolean result= cocheElectricoService.deleteAllCocheElectrico();
+        if(result){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.internalServerError().build();
+    }
+
+
 
     /**
      * Conversión de entidad a DTO
      * @param cocheElectrico
      * @return cocheElectricoDTO
      */
-    private CocheElectricoDTO convertCocheElectricotoDTO(CocheElectrico cocheElectrico){
+    private CocheElectricoDTO convertCocheElectricoToDTO(CocheElectrico cocheElectrico){
         CocheElectricoDTO cocheElectricoDTO = modelMapper.map(cocheElectrico, CocheElectricoDTO.class);
         return cocheElectricoDTO;
     }

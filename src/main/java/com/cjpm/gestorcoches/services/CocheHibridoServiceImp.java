@@ -3,17 +3,21 @@ package com.cjpm.gestorcoches.services;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.repository.CocheHibridoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 import static com.cjpm.gestorcoches.factory.CocheType.COCHE_HIBRIDO;
 
+@Service
 public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     //Atributos
     private CocheFactoryImp cocheFactory = new CocheFactoryImp();
 
+    @Autowired
     private CocheHibridoRepository cocheHibridoRepository;
 
     //Funciones

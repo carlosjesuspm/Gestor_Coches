@@ -4,16 +4,21 @@ package com.cjpm.gestorcoches.services;
 import com.cjpm.gestorcoches.entities.CocheElectrico;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.repository.CocheElectricoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 import static com.cjpm.gestorcoches.factory.CocheType.*;
 
+@Service
 public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     //Atributos
     private CocheFactoryImp cocheFactory = new CocheFactoryImp();
+
+    @Autowired
     private CocheElectricoRepository cocheElectricoRepository;
 
 
@@ -26,7 +31,8 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
      * @return CocheElectrico
      */
     public CocheElectrico saveCocheElectrico(CocheElectrico cocheElectrico) {
-        return cocheElectricoRepository.save((CocheElectrico)cocheFactory.creadorAutomovil(COCHE_ELECTRICO));
+        cocheElectrico= (CocheElectrico) cocheFactory.creadorAutomovil(COCHE_ELECTRICO);
+        return cocheElectricoRepository.save(cocheElectrico);
     }
 
 

@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name="coches")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Coche implements IFuncionesCoche{
 
 
@@ -23,11 +23,11 @@ public abstract class Coche implements IFuncionesCoche{
     @Column(name = "color")
     protected String color;
     @Column(name = "aire_acondicionado")
-    protected Boolean aireAcondicionado;
+    protected boolean aireAcondicionado;
     @Column(name = "motor")
-    protected Boolean motor;
+    protected boolean motor;
     @Column(name = "bateria")
-    protected Boolean bateria;
+    protected boolean bateria;
 
     //Constructores
     public Coche() {
@@ -76,7 +76,7 @@ public abstract class Coche implements IFuncionesCoche{
         this.color = color;
     }
 
-    public Boolean getAireAcondicionado() {
+    public boolean getAireAcondicionado() {
         return aireAcondicionado;
     }
 
@@ -84,7 +84,7 @@ public abstract class Coche implements IFuncionesCoche{
         this.aireAcondicionado = aireAcondicionado;
     }
 
-    public Boolean getMotor() {
+    public boolean getMotor() {
         return motor;
     }
 
@@ -92,7 +92,7 @@ public abstract class Coche implements IFuncionesCoche{
         this.motor = motor;
     }
 
-    public Boolean getBateria() {
+    public boolean getBateria() {
         return bateria;
     }
 
