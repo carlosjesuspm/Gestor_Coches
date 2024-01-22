@@ -21,7 +21,7 @@ public class CocheCombustionController {
      */
 
     @Autowired
-    private CocheCombustionServiceImp cocheCombustionService = new CocheCombustionServiceImp();
+    private CocheCombustionServiceImp cocheCombustionService;
 
     @Autowired
     private ModelMapper modelMapper;

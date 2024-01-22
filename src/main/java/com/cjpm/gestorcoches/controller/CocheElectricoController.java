@@ -59,7 +59,6 @@ public class CocheElectricoController {
         return cocheElectricoOpt.map(cocheElectrico -> {
                     CocheElectricoDTO cocheElectricoDTO = new CocheElectricoDTO();
                     cocheElectricoDTO.setIdCoche(cocheElectrico.getIdCoche());
-                    cocheElectricoDTO.setIdCocheElectrico(cocheElectrico.getIdCocheElectrico());
                     cocheElectricoDTO.setBateriaElectrica(cocheElectrico.isBateriaElectrica());
                     cocheElectricoDTO.setMarca(cocheElectrico.getMarca());
                     cocheElectricoDTO.setBateria(cocheElectrico.getBateria());
@@ -84,7 +83,7 @@ public class CocheElectricoController {
     public ResponseEntity<CocheElectricoDTO> saveCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
 
         CocheElectrico cocheElectrico = convertCocheElectricoDTOToEntity(cocheElectricoDTO);
-        if(cocheElectrico.getIdCocheElectrico() !=1L){
+        if(cocheElectrico.getIdCoche() !=1L){
             throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
         }
         cocheElectricoService.saveCocheElectrico(cocheElectrico);

@@ -1,5 +1,7 @@
 package com.cjpm.gestorcoches.dto;
 
+import com.cjpm.gestorcoches.entities.CocheElectrico;
+
 import java.io.Serializable;
 
 public class CocheElectricoDTO extends CocheDTO implements Serializable {
@@ -11,6 +13,11 @@ public class CocheElectricoDTO extends CocheDTO implements Serializable {
     public CocheElectricoDTO() {
 
     }
+
+    public CocheElectricoDTO(CocheElectrico cocheElectrico) {
+
+    }
+
     public CocheElectricoDTO(long idCocheElectrico, boolean bateriaElectrica) {
         this.idCocheElectrico = idCocheElectrico;
         this.bateriaElectrica = bateriaElectrica;

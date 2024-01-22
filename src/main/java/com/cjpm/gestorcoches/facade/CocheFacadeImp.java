@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Clase Fachada que permite crear el objeto con todos sus componentes
  */
 
-@Component
+
 public class CocheFacadeImp implements ICocheFacade{
 
     /**

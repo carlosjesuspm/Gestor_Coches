@@ -8,7 +8,7 @@ import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.facade.CocheFacadeImp;
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class CocheFactoryImp implements ICocheFactory {
 
     CocheFacadeImp cocheFacade = new CocheFacadeImp();

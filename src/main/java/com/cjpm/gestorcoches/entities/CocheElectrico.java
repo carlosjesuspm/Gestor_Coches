@@ -8,32 +8,20 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="coches_electrico")
 public class CocheElectrico extends Coche {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idCocheElectrico;
+
     @Column(name = "bateria_electrica")
     private boolean bateriaElectrica;
 
     public CocheElectrico() {
     }
 
-    public CocheElectrico(long idCocheElectrico, boolean bateriaElectrica) {
-        this.idCocheElectrico = idCocheElectrico;
+    public CocheElectrico(boolean bateriaElectrica) {
         this.bateriaElectrica = bateriaElectrica;
     }
 
-    public CocheElectrico(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, long idCocheElectrico, boolean bateriaElectrica) {
+    public CocheElectrico(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, boolean bateriaElectrica) {
         super(idCoche, marca, modelo, color, aireAcondicionado, motor, bateria);
-        this.idCocheElectrico = idCocheElectrico;
         this.bateriaElectrica = bateriaElectrica;
-    }
-
-    public long getIdCocheElectrico() {
-        return idCocheElectrico;
-    }
-
-    public void setIdCocheElectrico(long idCocheElectrico) {
-        this.idCocheElectrico = idCocheElectrico;
     }
 
     public boolean isBateriaElectrica() {
@@ -44,5 +32,16 @@ public class CocheElectrico extends Coche {
         this.bateriaElectrica = bateriaElectrica;
     }
 
-
+    @Override
+    public String toString() {
+        return "CocheElectrico{" +
+                "bateriaElectrica=" + bateriaElectrica +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", color='" + color + '\'' +
+                ", aireAcondicionado=" + aireAcondicionado +
+                ", motor=" + motor +
+                ", bateria=" + bateria +
+                '}';
+    }
 }

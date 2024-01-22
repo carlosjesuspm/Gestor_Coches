@@ -7,8 +7,7 @@ import java.io.Serializable;
  * Tabla Coche
  */
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public abstract class Coche implements IFuncionesCoche{
 
 

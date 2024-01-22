@@ -16,7 +16,8 @@ import static com.cjpm.gestorcoches.factory.CocheType.*;
 public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     //Atributos
-    private CocheFactoryImp cocheFactory = new CocheFactoryImp();
+    @Autowired
+    private CocheFactoryImp cocheFactory;
 
     @Autowired
     private CocheElectricoRepository cocheElectricoRepository;

@@ -21,7 +21,7 @@ public class CocheHibridoController {
      */
 
     @Autowired
-    private CocheElectricoServiceImp cocheHibridoService = new CocheElectricoServiceImp();
+    private CocheElectricoServiceImp cocheHibridoService;
 
     @Autowired
     private ModelMapper modelMapper;
