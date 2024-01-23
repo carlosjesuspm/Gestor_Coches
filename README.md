@@ -31,7 +31,7 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
   * SpringDevTools
   * SpringBootStarterTest
   * ModelMapper (conversión de entities a DTOs)
-    * Versión: 3.2.0 (Octubre, 2023)
+    * Versión: 3.2.2 (Octubre, 2023)
 
 # Aprendizaje
 
@@ -39,3 +39,5 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
 * La conversión de entidad a dto ocurre en la capa controlador
 * Patrón Facade se encarga de crear cada uno de los componentes que conforman el objeto. Por ejemplo, del objeto coche crearía (batería, motor, aire acondicionado...)
 * Patrón Factory se encarga de crear el objeto en su totalidad. Por ejemplo, crea la entidad coche montada completamente.
+* Cuando hay una clase padre se ha de utilizar @MappedSupperClass y sólo ha de tener id la versión padre y no las subclases (h2database no lo reconoce y no funciona)
+* Para evitar la duplicación de código a la hora de pasar de entidad a DTO, y viceversa, es mejor crear una clase genérica que se pueda extrapolar a las subclases

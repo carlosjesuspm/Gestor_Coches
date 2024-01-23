@@ -3,30 +3,19 @@ package com.cjpm.gestorcoches.dto;
 import java.io.Serializable;
 
 public class CocheHibridoDTO extends CocheDTO implements Serializable {
-
-    private long idCocheHibrido;
+    private static final long serialVersionUID = 1L;
     private boolean tanqueHidrogeno;
 
     public CocheHibridoDTO() {
 
     }
-    public CocheHibridoDTO(long idCocheHibrido, boolean tanqueHidrogeno) {
-        this.idCocheHibrido = idCocheHibrido;
+    public CocheHibridoDTO(boolean tanqueHidrogeno) {
         this.tanqueHidrogeno = tanqueHidrogeno;
     }
 
-    public CocheHibridoDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, long idCocheHibrido, boolean tanqueHidrogeno) {
+    public CocheHibridoDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, boolean tanqueHidrogeno) {
         super(idCoche, marca, modelo, color, aireAcondicionado, motor, bateria);
-        this.idCocheHibrido = idCocheHibrido;
         this.tanqueHidrogeno = tanqueHidrogeno;
-    }
-
-    public long getIdCocheHibrido() {
-        return idCocheHibrido;
-    }
-
-    public void setIdCocheHibrido(long idCocheHibrido) {
-        this.idCocheHibrido = idCocheHibrido;
     }
 
     public boolean isTanqueHidrogeno() {
@@ -40,7 +29,6 @@ public class CocheHibridoDTO extends CocheDTO implements Serializable {
     @Override
     public String toString() {
         return "CocheHibrido{" +
-                "idCocheHibrido=" + idCocheHibrido +
                 ", tanqueHidrogeno=" + tanqueHidrogeno +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +

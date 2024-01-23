@@ -3,6 +3,7 @@ package com.cjpm.gestorcoches.controller;
 import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
 import com.cjpm.gestorcoches.entities.CocheElectrico;
 import com.cjpm.gestorcoches.services.CocheElectricoServiceImp;
+import com.cjpm.gestorcoches.util.DTOConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,14 @@ public class CocheElectricoController {
     private final CocheElectricoServiceImp cocheElectricoService;
 
 
-    private ModelMapper modelMapper;
-
+    private final DTOConverter dtoConverter;
 
     @Autowired
-    public CocheElectricoController(CocheElectricoServiceImp cocheElectricoService, ModelMapper modelMapper) {
+    public CocheElectricoController(CocheElectricoServiceImp cocheElectricoService, DTOConverter dtoConverter) {
         this.cocheElectricoService = cocheElectricoService;
-        this.modelMapper = modelMapper;
+        this.dtoConverter = dtoConverter;
     }
+
 
     /**
      * Devuelve todos los coches eléctricos
@@ -42,9 +43,8 @@ public class CocheElectricoController {
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
 
         return listaCochesElectricos.stream()
-                .map(this::convertCocheElectricoToDTO)
+                .map(cocheElectrico->dtoConverter.convertEntityToDTO(listaCochesElectricos,CocheElectricoDTO.class ))
                 .collect(Collectors.toList());
-
     }
 
 
@@ -82,12 +82,12 @@ public class CocheElectricoController {
     @PostMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> saveCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
 
-        CocheElectrico cocheElectrico = convertCocheElectricoDTOToEntity(cocheElectricoDTO);
+        CocheElectrico cocheElectrico = dtoConverter.convertDTOToEntity(cocheElectricoDTO, CocheElectrico.class);
         if(cocheElectrico.getIdCoche() !=1L){
             throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
         }
         cocheElectricoService.saveCocheElectrico(cocheElectrico);
-        return ResponseEntity.ok(convertCocheElectricoToDTO(cocheElectrico));
+        return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheElectrico, CocheElectricoDTO.class));
 
     }
 
@@ -99,13 +99,13 @@ public class CocheElectricoController {
      */
     @PutMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> updateCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
-        if(cocheElectricoDTO.getIdCocheElectrico()!=1L){
+        if(cocheElectricoDTO.getIdCoche()!=1L){
             throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
         }
 
-        CocheElectrico cocheElectrico = convertCocheElectricoDTOToEntity(cocheElectricoDTO);
+        CocheElectrico cocheElectrico = dtoConverter.convertDTOToEntity(cocheElectricoDTO, CocheElectrico.class);
         cocheElectricoService.saveCocheElectrico(cocheElectrico);
-        return ResponseEntity.ok(convertCocheElectricoToDTO(cocheElectrico));
+        return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheElectrico, CocheElectricoDTO.class));
     }
 
     //Eliminar coche eléctrico determinado
@@ -136,32 +136,5 @@ public class CocheElectricoController {
         }
         return ResponseEntity.internalServerError().build();
     }
-
-
-
-    /**
-     * Conversión de entidad a DTO
-     * @param cocheElectrico
-     * @return cocheElectricoDTO
-     */
-    private CocheElectricoDTO convertCocheElectricoToDTO(CocheElectrico cocheElectrico){
-        CocheElectricoDTO cocheElectricoDTO = modelMapper.map(cocheElectrico, CocheElectricoDTO.class);
-        return cocheElectricoDTO;
-    }
-
-    /**
-     * Conversión DTO a entidad
-     * @param cocheElectricoDTO
-     * @return cocheElectrico
-     * @throws ParseException
-     */
-    private CocheElectrico convertCocheElectricoDTOToEntity(CocheElectricoDTO cocheElectricoDTO) throws ParseException{
-        CocheElectrico cocheElectrico = modelMapper.map(cocheElectricoDTO, CocheElectrico.class);
-
-        return cocheElectrico;
-    }
-
-
-
 
 }

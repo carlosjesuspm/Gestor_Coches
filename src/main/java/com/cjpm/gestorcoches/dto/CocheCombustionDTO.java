@@ -6,33 +6,22 @@ import java.io.Serializable;
 
 public class CocheCombustionDTO extends CocheDTO implements Serializable {
 
-
-    private long idCocheCombustion;
+    private static final long serialVersionUID = 1L;
     private boolean motorCombustion;
 
     public CocheCombustionDTO() {
 
     }
-    public CocheCombustionDTO(long idCocheCombustion, boolean motorCombustion) {
-        this.idCocheCombustion = idCocheCombustion;
+    public CocheCombustionDTO(boolean motorCombustion) {
         this.motorCombustion = motorCombustion;
     }
     public CocheCombustionDTO(CocheCombustion cocheCombustion) {
 
     }
 
-    public CocheCombustionDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, long idCocheCombustion, boolean motorCombustion) {
+    public CocheCombustionDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, boolean motorCombustion) {
         super(idCoche, marca, modelo, color, aireAcondicionado, motor, bateria);
-        this.idCocheCombustion = idCocheCombustion;
         this.motorCombustion = motorCombustion;
-    }
-
-    public long getIdCocheCombustion() {
-        return idCocheCombustion;
-    }
-
-    public void setIdCocheCombustion(long idCocheCombustion) {
-        this.idCocheCombustion = idCocheCombustion;
     }
 
     public boolean isMotorCombustion() {
@@ -46,7 +35,6 @@ public class CocheCombustionDTO extends CocheDTO implements Serializable {
     @Override
     public String toString() {
         return "CocheCombustion{" +
-                "idCocheCombustion=" + idCocheCombustion +
                 ", motorCombustion=" + motorCombustion +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
