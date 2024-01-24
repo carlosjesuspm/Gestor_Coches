@@ -49,6 +49,7 @@ public class CocheElectricoController {
 
     /**
      * Devuelve el coche eléctrico que solicita el cliente
+     * @param id -
      * @return CocheElectricoDTO
      */
     @GetMapping("/coches_electricos/{id}")
@@ -74,8 +75,9 @@ public class CocheElectricoController {
     }
 
     /**
-     * Método que guarda un coche creado
-     * @return ResponseEntity
+     * Método que guarda un coche eléctrico creado
+     * @param cocheElectricoDTO -
+     * @return ResponseEntity<CocheElectricoDTO>
      */
 
     @PostMapping("/coches_electricos")

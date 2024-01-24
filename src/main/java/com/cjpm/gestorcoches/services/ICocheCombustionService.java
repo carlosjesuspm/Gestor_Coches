@@ -1,7 +1,6 @@
 package com.cjpm.gestorcoches.services;
 
 import com.cjpm.gestorcoches.entities.CocheCombustion;
-import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,8 +8,9 @@ import java.util.Optional;
 public interface ICocheCombustionService {
 
     //Coche Combustión
-    void saveCocheCombustion(CocheFactoryImp cocheFactory);
+    CocheCombustion saveCocheCombustion(CocheCombustion cocheCombustion);
     List<CocheCombustion> findAllCocheCombustion();
     Optional<CocheCombustion> findCocheCombustionById(Long id);
-    void deleteCocheCombustion(CocheCombustion cocheCombustion);
+    boolean deleteAllCocheCombustion();
+    boolean deleteCocheCombustionById(Long id);
 }
