@@ -51,7 +51,7 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
     /**
      * Método encargado de devolver un coche eléctrico determinado
      * @param id
-     * @return Optional
+     * @return Optional<CocheElectrico>
      */
     public Optional<CocheElectrico> findCocheElectricoById(Long id) {
 

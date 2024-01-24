@@ -1,17 +1,16 @@
 package com.cjpm.gestorcoches.services;
 
-import com.cjpm.gestorcoches.entities.CocheElectrico;
-import com.cjpm.gestorcoches.entities.CocheHibrido;
-import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 
+import com.cjpm.gestorcoches.entities.CocheHibrido;
 import java.util.List;
 import java.util.Optional;
 
 public interface ICocheHibridoService {
 
     //Coche Eléctrico
-    void saveCocheHibrido(CocheFactoryImp cocheFactory);
+    CocheHibrido saveCocheHibrido(CocheHibrido cocheHibrido);
     List<CocheHibrido> findAllCocheHibrido();
     Optional<CocheHibrido> findCocheHibridoById(Long id);
-    void deleteCocheHibrido(CocheHibrido cocheHibrido);
+    boolean deleteAllCocheHibrido();
+    boolean deleteCocheHibridoById(Long id);
 }

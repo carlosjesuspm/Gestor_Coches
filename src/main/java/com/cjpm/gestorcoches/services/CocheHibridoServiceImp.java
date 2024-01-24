@@ -15,7 +15,7 @@ import static com.cjpm.gestorcoches.factory.CocheType.COCHE_HIBRIDO;
 public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     //Atributos
-    private CocheFactoryImp cocheFactory = new CocheFactoryImp();
+    private CocheFactoryImp cocheFactory;
 
     @Autowired
     private CocheHibridoRepository cocheHibridoRepository;
@@ -23,13 +23,23 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
     //Funciones
         // Crear coche híbrido nuevo
 
-
-    @Override
-    public void saveCocheHibrido(CocheFactoryImp cocheFactory) {
-        cocheHibridoRepository.save((CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO));
+    /**
+     * Método encargado de crear y guardar coche híbrido
+     * @param cocheHibrido
+     * @return CocheHibrido
+     */
+    public CocheHibrido saveCocheHibrido(CocheHibrido cocheHibrido) {
+        cocheHibrido=(CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO);
+        return cocheHibridoRepository.save(cocheHibrido);
     }
 
-    // Mostrar listado de coches híbridos
+    /**
+     * Método encargado de devolver todos los coches híbridos
+     * @return List<CocheHibrido>
+     */
+
+        // Mostrar listado de coches híbridos
+
     @Override
     public List<CocheHibrido> findAllCocheHibrido() {
 
@@ -37,6 +47,12 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
     }
 
         // Muestra coche híbrido determinado
+
+    /**
+     * Método encargado de devolver un coche híbrido determinado
+     * @param id
+     * @return Optional<CocheHibrido>
+     */
     @Override
     public Optional<CocheHibrido> findCocheHibridoById(Long id) {
 
@@ -47,8 +63,28 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     }
 
+    /**
+     * Elimina todos los coches híbridos
+     * @return true
+     */
+
     @Override
-    public void deleteCocheHibrido(CocheHibrido cocheHibrido) {
-        cocheHibridoRepository.delete(cocheHibrido);
+    public boolean deleteAllCocheHibrido() {
+        cocheHibridoRepository.deleteAll();
+        return true;
+    }
+
+    /**
+     * Elimina determinado coche híbrido
+     * @param id
+     * @return true
+     */
+    @Override
+    public boolean deleteCocheHibridoById(Long id) {
+        if(id==null || !cocheHibridoRepository.existsById(id)){
+            return false;
+        }
+        cocheHibridoRepository.deleteById(id);
+        return false;
     }
 }

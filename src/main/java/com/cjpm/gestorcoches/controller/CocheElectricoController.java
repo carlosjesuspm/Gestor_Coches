@@ -3,8 +3,7 @@ package com.cjpm.gestorcoches.controller;
 import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
 import com.cjpm.gestorcoches.entities.CocheElectrico;
 import com.cjpm.gestorcoches.services.CocheElectricoServiceImp;
-import com.cjpm.gestorcoches.util.DTOConverter;
-import org.modelmapper.ModelMapper;
+import com.cjpm.gestorcoches.config.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -93,9 +92,9 @@ public class CocheElectricoController {
 
     /**
      * Actualizar coche eléctrico
-     * @param cocheElectricoDTO
+     * @param cocheElectricoDTO -
      * @return ResponseEntity<CocheElectrico>
-     * @throws ParseException
+     * @throws ParseException -
      */
     @PutMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> updateCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
@@ -112,7 +111,7 @@ public class CocheElectricoController {
 
     /**
      * Eliminar coche eléctrico determinado
-     * @param id
+     * @param id - id del coche eléctrico
      * @return ResponseEntity<CocheElectrico>
      */
     @DeleteMapping("/coches_electricos/{id}")

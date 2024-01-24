@@ -3,14 +3,12 @@ package com.cjpm.gestorcoches.controller;
 import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.services.CocheHibridoServiceImp;
-import com.cjpm.gestorcoches.util.DTOConverter;
+import com.cjpm.gestorcoches.config.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,7 +47,7 @@ public class CocheHibridoController {
 
     /**
      * Devuelve el coche híbrido que solicita el cliente
-     * @param id
+     * @param id - id del coche híbrido
      * @return CocheHibridoDTO
      */
     @GetMapping("/coches_hibridos/{id}")
@@ -72,4 +70,62 @@ public class CocheHibridoController {
         }).orElseGet(()-> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Método que guarda un coche creado
+     * @return ResponseEntity
+     */
+    @PostMapping("/coches_hibridos")
+    public ResponseEntity<CocheHibridoDTO> saveCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO){
+        CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
+        if(cocheHibrido.getIdCoche()!=1L) {
+            throw new IllegalArgumentException("El id de este coche híbrido ya está empleado");
+        }
+        cocheHibridoService.saveCocheHibrido(cocheHibrido);
+        return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheHibrido, CocheHibridoDTO.class));
+
+    }
+
+    /**
+     * Actualizar coche híbrido
+     * @param cocheHibridoDTO -
+     * @return ResponseEntity<CocheHibridoDTO>
+     * @throws ParseException -
+     */
+    @PutMapping("/coches_hibridos")
+    public ResponseEntity<CocheHibridoDTO> updateCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO) throws ParseException{
+        if(cocheHibridoDTO.getIdCoche()!=1L) {
+            throw new IllegalArgumentException("El id de este coche híbrido ya está empleado");
+        }
+        CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
+        cocheHibridoService.saveCocheHibrido(cocheHibrido);
+        return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheHibrido, CocheHibridoDTO.class));
+
+    }
+
+    /**
+     * Eliminar coche híbrido determinado
+     * @param id - id del coche híbrido
+     * @return ResponseEntity<CocheHibrido>
+     */
+    @DeleteMapping("/coches_hibridos/{id}")
+    public ResponseEntity<CocheHibrido> deleteCocheHibrido(@PathVariable Long id){
+        boolean result=cocheHibridoService.deleteCocheHibridoById(id);
+        if(result){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.internalServerError().build();
+    }
+
+    /**
+     * Borrar todos los coches híbridos
+     * @return ResponseEntity<CocheHibrido>
+     */
+    @DeleteMapping("/coches_hibridos")
+    public ResponseEntity<CocheHibrido> deleteAllCocheHibrido(){
+        boolean result = cocheHibridoService.deleteAllCocheHibrido();
+        if(result){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.internalServerError().build();
+    }
 }

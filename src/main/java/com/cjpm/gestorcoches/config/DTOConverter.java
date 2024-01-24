@@ -1,8 +1,10 @@
-package com.cjpm.gestorcoches.util;
+package com.cjpm.gestorcoches.config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-
+@Configuration
 public class DTOConverter {
 
     private final ModelMapper modelMapper;
