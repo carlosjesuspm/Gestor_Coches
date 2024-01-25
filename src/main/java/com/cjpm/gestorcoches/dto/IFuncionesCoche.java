@@ -1,4 +1,4 @@
-package com.cjpm.gestorcoches.entities;
+package com.cjpm.gestorcoches.dto;
 
 public interface IFuncionesCoche {
 

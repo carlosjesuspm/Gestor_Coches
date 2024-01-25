@@ -66,6 +66,9 @@ public class CocheCombustionController {
             cocheCombustionDTO.setColor(cocheCombustion.getColor());
             cocheCombustionDTO.setAireAcondicionadoEncendido(cocheCombustion.getAireAcondicionadoEncendido());
             cocheCombustionDTO.setMotorEncendido(cocheCombustion.getMotorEncendido());
+            cocheCombustionDTO.encenderAireAcondicionado();
+            cocheCombustionDTO.encenderMotor();
+            cocheCombustionDTO.encederBateria();
 
             return ResponseEntity.ok(cocheCombustionDTO);
 

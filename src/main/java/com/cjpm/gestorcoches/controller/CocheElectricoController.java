@@ -42,7 +42,7 @@ public class CocheElectricoController {
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
 
         return listaCochesElectricos.stream()
-                .map(cocheElectrico->dtoConverter.convertEntityToDTO(listaCochesElectricos,CocheElectricoDTO.class ))
+                .map(cocheElectrico->dtoConverter.convertEntityToDTO(listaCochesElectricos,CocheElectricoDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -66,6 +66,9 @@ public class CocheElectricoController {
                     cocheElectricoDTO.setColor(cocheElectrico.getColor());
                     cocheElectricoDTO.setAireAcondicionadoEncendido(cocheElectrico.getAireAcondicionadoEncendido());
                     cocheElectricoDTO.setMotorEncendido(cocheElectrico.getMotorEncendido());
+                    cocheElectricoDTO.encenderAireAcondicionado();
+                    cocheElectricoDTO.encederBateria();
+                    cocheElectricoDTO.encenderMotor();
 
                     return ResponseEntity.ok(cocheElectricoDTO);
 

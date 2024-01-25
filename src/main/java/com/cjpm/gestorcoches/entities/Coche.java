@@ -6,7 +6,7 @@ import jakarta.persistence.*;
  */
 
 @MappedSuperclass
-public abstract class Coche implements IFuncionesCoche{
+public abstract class Coche{
 
 
     //Atributos
@@ -30,14 +30,14 @@ public abstract class Coche implements IFuncionesCoche{
     public Coche() {
     }
 
-    public Coche(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria) {
+    public Coche(long idCoche, String marca, String modelo, String color, boolean aireAcondicionadoEncendido, boolean motorEncendido, boolean bateriaEncendida) {
         this.idCoche = idCoche;
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
-        this.aireAcondicionadoEncendido = aireAcondicionado;
-        this.motorEncendido = motor;
-        this.bateriaEncendida = bateria;
+        this.aireAcondicionadoEncendido = aireAcondicionadoEncendido;
+        this.motorEncendido = motorEncendido;
+        this.bateriaEncendida = bateriaEncendida;
     }
 
     //Getters y Setters
@@ -97,16 +97,7 @@ public abstract class Coche implements IFuncionesCoche{
         this.bateriaEncendida = bateriaEncendida;
     }
 
-    //Funciones Coche
-    public boolean encenderAireAcondicionado(){
-        return aireAcondicionadoEncendido =true;
-    };
-    public boolean encederBateria(){
-        return bateriaEncendida =true;
-    };
-    public boolean encenderMotor(){
-        return motorEncendido =true;
-    };
+
 
     @Override
     public String toString() {

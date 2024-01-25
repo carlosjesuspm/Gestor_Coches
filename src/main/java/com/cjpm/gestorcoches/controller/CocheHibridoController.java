@@ -64,6 +64,9 @@ public class CocheHibridoController {
             cocheHibridoDTO.setColor(cocheHibrido.getColor());
             cocheHibridoDTO.setAireAcondicionadoEncendido(cocheHibrido.getAireAcondicionadoEncendido());
             cocheHibridoDTO.setMotorEncendido(cocheHibrido.getMotorEncendido());
+            cocheHibridoDTO.encenderAireAcondicionado();
+            cocheHibridoDTO.encederBateria();
+            cocheHibridoDTO.encenderMotor();
 
             return ResponseEntity.ok(cocheHibridoDTO);
 
