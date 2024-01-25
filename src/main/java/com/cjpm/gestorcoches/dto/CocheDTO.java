@@ -15,20 +15,20 @@ public abstract class CocheDTO implements Serializable {
 
     protected String color;
 
-    protected Boolean aireAcondicionado;
+    protected Boolean aireAcondicionadoEncendido;
 
-    protected Boolean motor;
+    protected Boolean motorEncendido;
 
-    protected Boolean bateria;
+    protected Boolean bateriaEncendida;
 
     //Constructores
     public CocheDTO() {
     }
 
     public CocheDTO(Boolean aireAcondicionado, Boolean motor, Boolean bateria) {
-        this.aireAcondicionado = aireAcondicionado;
-        this.motor = motor;
-        this.bateria = bateria;
+        this.aireAcondicionadoEncendido = aireAcondicionado;
+        this.motorEncendido = motor;
+        this.bateriaEncendida = bateria;
     }
 
     public CocheDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria) {
@@ -36,9 +36,9 @@ public abstract class CocheDTO implements Serializable {
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
-        this.aireAcondicionado = aireAcondicionado;
-        this.motor = motor;
-        this.bateria = bateria;
+        this.aireAcondicionadoEncendido = aireAcondicionado;
+        this.motorEncendido = motor;
+        this.bateriaEncendida = bateria;
     }
 
     //Getters y Setters
@@ -74,40 +74,40 @@ public abstract class CocheDTO implements Serializable {
         this.color = color;
     }
 
-    public Boolean getAireAcondicionado() {
-        return aireAcondicionado;
+    public Boolean getAireAcondicionadoEncendido() {
+        return aireAcondicionadoEncendido;
     }
 
-    public void setAireAcondicionado(Boolean aireAcondicionado) {
-        this.aireAcondicionado = aireAcondicionado;
+    public void setAireAcondicionadoEncendido(Boolean aireAcondicionadoEncendido) {
+        this.aireAcondicionadoEncendido = aireAcondicionadoEncendido;
     }
 
-    public Boolean getMotor() {
-        return motor;
+    public Boolean getMotorEncendido() {
+        return motorEncendido;
     }
 
-    public void setMotor(Boolean motor) {
-        this.motor = motor;
+    public void setMotorEncendido(Boolean motorEncendido) {
+        this.motorEncendido = motorEncendido;
     }
 
-    public Boolean getBateria() {
-        return bateria;
+    public Boolean getBateriaEncendida() {
+        return bateriaEncendida;
     }
 
-    public void setBateria(Boolean bateria) {
-        this.bateria = bateria;
+    public void setBateriaEncendida(Boolean bateriaEncendida) {
+        this.bateriaEncendida = bateriaEncendida;
     }
 
     @Override
     public String toString() {
         return "Coche{" +
-                "idCoche=" + idCoche +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", color='" + color + '\'' +
-                ", aireAcondicionadoEncendido=" + aireAcondicionado +
-                ", motorEncendido=" + motor +
-                ", bateriaEncendida=" + bateria +
+                "Id Coche=" + idCoche +
+                ", Marca='" + marca + '\'' +
+                ", Modelo='" + modelo + '\'' +
+                ", Color='" + color + '\'' +
+                ", Aire Acondicionado Encendido=" + aireAcondicionadoEncendido +
+                ", Motor Encendido=" + motorEncendido +
+                ", Bateria Encendida=" + bateriaEncendida +
                 '}';
     }
 

@@ -61,11 +61,11 @@ public class CocheCombustionController {
             cocheCombustionDTO.setIdCoche(cocheCombustion.getIdCoche());
             cocheCombustionDTO.setMotorCombustion(cocheCombustion.isMotorCombustion());
             cocheCombustionDTO.setMarca(cocheCombustion.getMarca());
-            cocheCombustionDTO.setBateria(cocheCombustion.getBateria());
+            cocheCombustionDTO.setBateriaEncendida(cocheCombustion.getBateriaEncendida());
             cocheCombustionDTO.setModelo(cocheCombustion.getModelo());
             cocheCombustionDTO.setColor(cocheCombustion.getColor());
-            cocheCombustionDTO.setAireAcondicionado(cocheCombustion.getAireAcondicionado());
-            cocheCombustionDTO.setMotor(cocheCombustion.getMotor());
+            cocheCombustionDTO.setAireAcondicionadoEncendido(cocheCombustion.getAireAcondicionadoEncendido());
+            cocheCombustionDTO.setMotorEncendido(cocheCombustion.getMotorEncendido());
 
             return ResponseEntity.ok(cocheCombustionDTO);
 

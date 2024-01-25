@@ -1,8 +1,6 @@
 package com.cjpm.gestorcoches.entities;
 import jakarta.persistence.*;
 
-import java.io.Serializable;
-
 /**
  * Tabla Coche
  */
@@ -22,11 +20,11 @@ public abstract class Coche implements IFuncionesCoche{
     @Column(name = "color")
     protected String color;
     @Column(name = "aire_acondicionado")
-    protected boolean aireAcondicionado;
+    protected boolean aireAcondicionadoEncendido;
     @Column(name = "motor")
-    protected boolean motor;
+    protected boolean motorEncendido;
     @Column(name = "bateria")
-    protected boolean bateria;
+    protected boolean bateriaEncendida;
 
     //Constructores
     public Coche() {
@@ -37,9 +35,9 @@ public abstract class Coche implements IFuncionesCoche{
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
-        this.aireAcondicionado = aireAcondicionado;
-        this.motor = motor;
-        this.bateria = bateria;
+        this.aireAcondicionadoEncendido = aireAcondicionado;
+        this.motorEncendido = motor;
+        this.bateriaEncendida = bateria;
     }
 
     //Getters y Setters
@@ -75,40 +73,52 @@ public abstract class Coche implements IFuncionesCoche{
         this.color = color;
     }
 
-    public boolean getAireAcondicionado() {
-        return aireAcondicionado;
+    public boolean getAireAcondicionadoEncendido() {
+        return aireAcondicionadoEncendido;
     }
 
-    public void setAireAcondicionado(Boolean aireAcondicionado) {
-        this.aireAcondicionado = aireAcondicionado;
+    public void setAireAcondicionadoEncendido(Boolean aireAcondicionadoEncendido) {
+        this.aireAcondicionadoEncendido = aireAcondicionadoEncendido;
     }
 
-    public boolean getMotor() {
-        return motor;
+    public boolean getMotorEncendido() {
+        return motorEncendido;
     }
 
-    public void setMotor(Boolean motor) {
-        this.motor = motor;
+    public void setMotorEncendido(Boolean motorEncendido) {
+        this.motorEncendido = motorEncendido;
     }
 
-    public boolean getBateria() {
-        return bateria;
+    public boolean getBateriaEncendida() {
+        return bateriaEncendida;
     }
 
-    public void setBateria(Boolean bateria) {
-        this.bateria = bateria;
+    public void setBateriaEncendida(Boolean bateriaEncendida) {
+        this.bateriaEncendida = bateriaEncendida;
     }
 
     //Funciones Coche
     public boolean encenderAireAcondicionado(){
-        return aireAcondicionado=true;
+        return aireAcondicionadoEncendido =true;
     };
     public boolean encederBateria(){
-        return bateria=true;
+        return bateriaEncendida =true;
     };
     public boolean encenderMotor(){
-        return motor=true;
+        return motorEncendido =true;
     };
 
+    @Override
+    public String toString() {
+        return "Coche{" +
+                "Id Coche=" + idCoche +
+                ", Marca='" + marca + '\'' +
+                ", Modelo='" + modelo + '\'' +
+                ", Color='" + color + '\'' +
+                ", Aire Acondicionado Encendido=" + aireAcondicionadoEncendido +
+                ", Motor Encendido=" + motorEncendido +
+                ", Bateria Encendida=" + bateriaEncendida +
+                '}';
+    }
 }
 

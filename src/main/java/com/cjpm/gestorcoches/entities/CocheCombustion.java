@@ -36,13 +36,13 @@ public class CocheCombustion extends Coche  {
     @Override
     public String toString() {
         return "CocheCombustion{" +
-                "motorCombustion=" + motorCombustion +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", color='" + color + '\'' +
-                ", aireAcondicionado=" + aireAcondicionado +
-                ", motor=" + motor +
-                ", bateria=" + bateria +
+                "Motor Combustion=" + motorCombustion +
+                ", Marca='" + marca + '\'' +
+                ", Modelo='" + modelo + '\'' +
+                ", Color='" + color + '\'' +
+                ", Aire Acondicionado Encendido=" + aireAcondicionadoEncendido +
+                ", Motor Encendido=" + motorEncendido +
+                ", Batería Encendida=" + bateriaEncendida +
                 '}';
     }
 }

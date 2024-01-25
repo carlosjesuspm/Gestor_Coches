@@ -37,13 +37,13 @@ public class CocheElectricoDTO extends CocheDTO implements Serializable {
     @Override
     public String toString() {
         return "CocheElectrico{" +
-                ", bateriaElectrica=" + bateriaElectrica +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", color='" + color + '\'' +
-                ", aireAcondicionado=" + aireAcondicionado +
-                ", motor=" + motor +
-                ", bateria=" + bateria +
+                "Bateria Eléctrica=" + bateriaElectrica +
+                ", Marca='" + marca + '\'' +
+                ", Modelo='" + modelo + '\'' +
+                ", Color='" + color + '\'' +
+                ", Aire Acondicionado Encendido=" + aireAcondicionadoEncendido +
+                ", Motor Encendido=" + motorEncendido +
+                ", Batería Encendida=" + bateriaEncendida +
                 '}';
     }
 }

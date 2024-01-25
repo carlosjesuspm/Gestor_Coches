@@ -59,11 +59,11 @@ public class CocheHibridoController {
             cocheHibridoDTO.setIdCoche(cocheHibrido.getIdCoche());
             cocheHibridoDTO.setTanqueHidrogeno(cocheHibrido.isTanqueHidrogeno());
             cocheHibridoDTO.setMarca(cocheHibrido.getMarca());
-            cocheHibridoDTO.setBateria(cocheHibrido.getBateria());
+            cocheHibridoDTO.setBateriaEncendida(cocheHibrido.getBateriaEncendida());
             cocheHibridoDTO.setModelo(cocheHibrido.getModelo());
             cocheHibridoDTO.setColor(cocheHibrido.getColor());
-            cocheHibridoDTO.setAireAcondicionado(cocheHibrido.getAireAcondicionado());
-            cocheHibridoDTO.setMotor(cocheHibrido.getMotor());
+            cocheHibridoDTO.setAireAcondicionadoEncendido(cocheHibrido.getAireAcondicionadoEncendido());
+            cocheHibridoDTO.setMotorEncendido(cocheHibrido.getMotorEncendido());
 
             return ResponseEntity.ok(cocheHibridoDTO);
 

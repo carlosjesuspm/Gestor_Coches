@@ -61,11 +61,11 @@ public class CocheElectricoController {
                     cocheElectricoDTO.setIdCoche(cocheElectrico.getIdCoche());
                     cocheElectricoDTO.setBateriaElectrica(cocheElectrico.isBateriaElectrica());
                     cocheElectricoDTO.setMarca(cocheElectrico.getMarca());
-                    cocheElectricoDTO.setBateria(cocheElectrico.getBateria());
+                    cocheElectricoDTO.setBateriaEncendida(cocheElectrico.getBateriaEncendida());
                     cocheElectricoDTO.setModelo(cocheElectrico.getModelo());
                     cocheElectricoDTO.setColor(cocheElectrico.getColor());
-                    cocheElectricoDTO.setAireAcondicionado(cocheElectrico.getAireAcondicionado());
-                    cocheElectricoDTO.setMotor(cocheElectrico.getMotor());
+                    cocheElectricoDTO.setAireAcondicionadoEncendido(cocheElectrico.getAireAcondicionadoEncendido());
+                    cocheElectricoDTO.setMotorEncendido(cocheElectrico.getMotorEncendido());
 
                     return ResponseEntity.ok(cocheElectricoDTO);
 

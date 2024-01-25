@@ -37,13 +37,13 @@ public class CocheHibrido extends Coche {
     @Override
     public String toString() {
         return "CocheHibrido{" +
-                ", tanqueHidrogeno=" + tanqueHidrogeno +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", color='" + color + '\'' +
-                ", aireAcondicionado=" + aireAcondicionado +
-                ", motor=" + motor +
-                ", bateria=" + bateria +
+                ", Tanque Hidrogeno=" + tanqueHidrogeno +
+                ", Marca='" + marca + '\'' +
+                ", Modelo='" + modelo + '\'' +
+                ", Color='" + color + '\'' +
+                ", Aire Acondicionado Encendido=" + aireAcondicionadoEncendido +
+                ", Motor Encendido=" + motorEncendido +
+                ", Batería Encendida=" + bateriaEncendida +
                 '}';
     }
 }
