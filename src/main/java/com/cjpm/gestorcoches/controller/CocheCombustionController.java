@@ -3,6 +3,7 @@ package com.cjpm.gestorcoches.controller;
 import com.cjpm.gestorcoches.config.DTOConverter;
 import com.cjpm.gestorcoches.dto.CocheCombustionDTO;
 import com.cjpm.gestorcoches.entities.CocheCombustion;
+import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheCombustionServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,18 @@ public class CocheCombustionController {
 
 
     private final CocheCombustionServiceImp cocheCombustionService;
-
+    private CocheFactoryImp cocheFactory;
     private final DTOConverter dtoConverter;
 
     @Autowired
-    public CocheCombustionController(CocheCombustionServiceImp cocheCombustionService, DTOConverter dtoConverter) {
+    public CocheCombustionController(CocheCombustionServiceImp cocheCombustionService, CocheFactoryImp cocheFactory, DTOConverter dtoConverter) {
         this.cocheCombustionService = cocheCombustionService;
+        this.cocheFactory = cocheFactory;
         this.dtoConverter = dtoConverter;
     }
+
+
+
 
     /**
      * Devuelve todos los coches de combustión

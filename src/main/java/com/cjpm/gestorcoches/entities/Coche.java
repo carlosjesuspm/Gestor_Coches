@@ -12,18 +12,19 @@ public abstract class Coche{
     //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idCoche;
+    @Column(name="id")
+    protected long idCoche;
     @Column(name = "marca")
     protected String marca;
     @Column(name = "modelo")
     protected String modelo;
     @Column(name = "color")
     protected String color;
-    @Column(name = "aire_acondicionado")
+    @Column(name = "aire_acondicionado_encendido")
     protected boolean aireAcondicionadoEncendido;
-    @Column(name = "motor")
+    @Column(name = "motor_encendido")
     protected boolean motorEncendido;
-    @Column(name = "bateria")
+    @Column(name = "bateria_encendida")
     protected boolean bateriaEncendida;
 
     //Constructores

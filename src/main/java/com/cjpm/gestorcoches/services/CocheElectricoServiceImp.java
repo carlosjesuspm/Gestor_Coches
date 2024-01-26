@@ -16,12 +16,16 @@ import static com.cjpm.gestorcoches.factory.CocheType.*;
 public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     //Atributos
-    @Autowired
-    private CocheFactoryImp cocheFactory;
 
-    @Autowired
     private CocheElectricoRepository cocheElectricoRepository;
 
+
+    public CocheElectricoServiceImp() {
+    }
+    @Autowired
+    public CocheElectricoServiceImp(CocheElectricoRepository cocheElectricoRepository) {
+        this.cocheElectricoRepository = cocheElectricoRepository;
+    }
 
     //Funciones
     // Crear coche eléctrico nuevo
@@ -32,7 +36,6 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
      * @return CocheElectrico
      */
     public CocheElectrico saveCocheElectrico(CocheElectrico cocheElectrico) {
-        cocheElectrico= (CocheElectrico) cocheFactory.creadorAutomovil(COCHE_ELECTRICO);
         return cocheElectricoRepository.save(cocheElectrico);
     }
 

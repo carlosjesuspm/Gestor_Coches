@@ -2,6 +2,7 @@ package com.cjpm.gestorcoches.controller;
 
 import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
+import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheHibridoServiceImp;
 import com.cjpm.gestorcoches.config.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,18 @@ public class CocheHibridoController {
 
 
     private final CocheHibridoServiceImp cocheHibridoService;
+    private final CocheFactoryImp cocheFactory;
 
     private final DTOConverter dtoConverter;
 
     @Autowired
-    public CocheHibridoController(CocheHibridoServiceImp cocheHibridoService, DTOConverter dtoConverter) {
+    public CocheHibridoController(CocheHibridoServiceImp cocheHibridoService, CocheFactoryImp cocheFactory, DTOConverter dtoConverter) {
         this.cocheHibridoService = cocheHibridoService;
+        this.cocheFactory = cocheFactory;
         this.dtoConverter = dtoConverter;
     }
+
+
 
     /**
      * Devuelve todos los coches híbridos

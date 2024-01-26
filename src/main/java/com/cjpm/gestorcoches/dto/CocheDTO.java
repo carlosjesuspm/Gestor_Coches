@@ -9,7 +9,7 @@ public abstract class CocheDTO implements Serializable, IFuncionesCoche {
     private static final long serialVersionUID = 1L;
 
     //Atributos
-    private long idCoche;
+    protected long idCoche;
     protected String marca;
     protected String modelo;
 

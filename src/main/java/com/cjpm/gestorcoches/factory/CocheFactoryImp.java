@@ -1,12 +1,17 @@
 package com.cjpm.gestorcoches.factory;
 
 
-import com.cjpm.gestorcoches.entities.Coche;
+import com.cjpm.gestorcoches.dto.CocheCombustionDTO;
+import com.cjpm.gestorcoches.dto.CocheDTO;
+import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
+import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
 import com.cjpm.gestorcoches.entities.CocheCombustion;
 import com.cjpm.gestorcoches.entities.CocheElectrico;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.facade.CocheFacadeImp;
 import org.springframework.stereotype.Component;
+
+import static com.cjpm.gestorcoches.factory.CocheType.*;
 
 @Component
 public class CocheFactoryImp implements ICocheFactory {
@@ -15,27 +20,17 @@ public class CocheFactoryImp implements ICocheFactory {
 
     /**
      * Llama a los métodos de la Facade para crear los objetos
-     * @param type
+     * @param cocheDTO -
      *
      */
-    public Coche creadorAutomovil(CocheType type){
+    public CocheDTO obtenerAutomovil(CocheDTO cocheDTO, CocheType cocheType){
 
-        switch(type){
-            case COCHE_COMBUSTION:
-                return (CocheCombustion)cocheFacade.montarCocheCombustion();
-
-
-            case COCHE_HIBRIDO:
-                return (CocheHibrido)cocheFacade.montarCocheHibrido();
-
-
-            case COCHE_ELECTRICO:
-                return (CocheElectrico)cocheFacade.montarCocheElectrico();
-
-
-            default:
-                throw new IllegalArgumentException("Tipo de automóvil no existe: " + type);
-        }
+        return switch (cocheType) {
+            case COCHE_COMBUSTION -> (CocheCombustionDTO) cocheFacade.startCoche(cocheDTO);
+            case COCHE_HIBRIDO -> (CocheHibridoDTO) cocheFacade.startCoche(cocheDTO);
+            case COCHE_ELECTRICO -> (CocheElectricoDTO) cocheFacade.startCoche(cocheDTO);
+            default -> throw new IllegalArgumentException("Tipo de automóvil no existe: " + cocheType);
+        };
     }
 
 }

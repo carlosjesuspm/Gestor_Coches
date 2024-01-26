@@ -1,7 +1,6 @@
 package com.cjpm.gestorcoches.services;
 
 import com.cjpm.gestorcoches.entities.CocheHibrido;
-import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.repository.CocheHibridoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +14,16 @@ import static com.cjpm.gestorcoches.factory.CocheType.COCHE_HIBRIDO;
 public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     //Atributos
-    private CocheFactoryImp cocheFactory;
+
+    private CocheHibridoRepository cocheHibridoRepository;
+
+    public CocheHibridoServiceImp() {
+    }
 
     @Autowired
-    private CocheHibridoRepository cocheHibridoRepository;
+    public CocheHibridoServiceImp(CocheHibridoRepository cocheHibridoRepository) {
+        this.cocheHibridoRepository = cocheHibridoRepository;
+    }
 
     //Funciones
         // Crear coche híbrido nuevo
@@ -29,7 +34,6 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
      * @return CocheHibrido
      */
     public CocheHibrido saveCocheHibrido(CocheHibrido cocheHibrido) {
-        cocheHibrido=(CocheHibrido) cocheFactory.creadorAutomovil(COCHE_HIBRIDO);
         return cocheHibridoRepository.save(cocheHibrido);
     }
 
@@ -42,7 +46,6 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     @Override
     public List<CocheHibrido> findAllCocheHibrido() {
-
         return cocheHibridoRepository.findAll();
     }
 

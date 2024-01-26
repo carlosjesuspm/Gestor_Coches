@@ -2,6 +2,7 @@ package com.cjpm.gestorcoches.controller;
 
 import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
 import com.cjpm.gestorcoches.entities.CocheElectrico;
+import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheElectricoServiceImp;
 import com.cjpm.gestorcoches.config.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,18 @@ public class CocheElectricoController {
 
 
     private final CocheElectricoServiceImp cocheElectricoService;
-
-
+    private CocheFactoryImp cocheFactory;
     private final DTOConverter dtoConverter;
 
     @Autowired
-    public CocheElectricoController(CocheElectricoServiceImp cocheElectricoService, DTOConverter dtoConverter) {
+    public CocheElectricoController(CocheElectricoServiceImp cocheElectricoService, CocheFactoryImp cocheFactory, DTOConverter dtoConverter) {
         this.cocheElectricoService = cocheElectricoService;
+        this.cocheFactory = cocheFactory;
         this.dtoConverter = dtoConverter;
     }
+
+
+
 
 
     /**
@@ -84,14 +88,14 @@ public class CocheElectricoController {
      */
 
     @PostMapping("/coches_electricos")
-    public ResponseEntity<CocheElectricoDTO> saveCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
+    public ResponseEntity<CocheElectrico> createCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
 
         CocheElectrico cocheElectrico = dtoConverter.convertDTOToEntity(cocheElectricoDTO, CocheElectrico.class);
-        if(cocheElectrico.getIdCoche() !=1L){
+        if(cocheElectrico.getIdCoche() !=0){
             throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
         }
-        cocheElectricoService.saveCocheElectrico(cocheElectrico);
-        return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheElectrico, CocheElectricoDTO.class));
+
+        return ResponseEntity.ok(cocheElectricoService.saveCocheElectrico(cocheElectrico));
 
     }
 
@@ -103,12 +107,13 @@ public class CocheElectricoController {
      */
     @PutMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> updateCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
-        if(cocheElectricoDTO.getIdCoche()!=1L){
+        if(cocheElectricoDTO.getIdCoche()==0){
             throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
         }
 
         CocheElectrico cocheElectrico = dtoConverter.convertDTOToEntity(cocheElectricoDTO, CocheElectrico.class);
         cocheElectricoService.saveCocheElectrico(cocheElectrico);
+        System.out.println(cocheElectrico.toString());
         return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheElectrico, CocheElectricoDTO.class));
     }
 

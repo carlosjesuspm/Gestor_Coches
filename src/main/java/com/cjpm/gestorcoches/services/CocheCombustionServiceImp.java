@@ -15,14 +15,16 @@ import static com.cjpm.gestorcoches.factory.CocheType.COCHE_COMBUSTION;
 public class CocheCombustionServiceImp implements ICocheCombustionService{
 
     //Atributo
-    @Autowired
-    private CocheFactoryImp cocheFactory;
 
-    @Autowired
+
     private CocheCombustionRepository cocheCombustionRepository;
 
-
-
+    public CocheCombustionServiceImp() {
+    }
+    @Autowired
+    public CocheCombustionServiceImp(CocheCombustionRepository cocheCombustionRepository) {
+        this.cocheCombustionRepository = cocheCombustionRepository;
+    }
     //Funciones
         //Crear coche
 
@@ -32,7 +34,6 @@ public class CocheCombustionServiceImp implements ICocheCombustionService{
      * @return CocheCombustion
      */
     public CocheCombustion saveCocheCombustion(CocheCombustion cocheCombustion) {
-        cocheCombustion = (CocheCombustion) cocheFactory.creadorAutomovil(COCHE_COMBUSTION);
         return cocheCombustionRepository.save(cocheCombustion);
     }
 
