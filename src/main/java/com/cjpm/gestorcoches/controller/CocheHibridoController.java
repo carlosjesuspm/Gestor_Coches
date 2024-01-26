@@ -80,16 +80,16 @@ public class CocheHibridoController {
 
     /**
      * Método que guarda un coche creado
-     * @return ResponseEntity
+     * @param cocheHibridoDTO -
+     * @return ResponseEntity<CocheHibrido>
      */
     @PostMapping("/coches_hibridos")
-    public ResponseEntity<CocheHibridoDTO> saveCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO){
+    public ResponseEntity<CocheHibrido> createCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO) throws ParseException{
         CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
-        if(cocheHibrido.getIdCoche()!=1L) {
+        if(cocheHibrido.getIdCoche()!=0) {
             throw new IllegalArgumentException("El id de este coche híbrido ya está empleado");
         }
-        cocheHibridoService.saveCocheHibrido(cocheHibrido);
-        return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheHibrido, CocheHibridoDTO.class));
+        return ResponseEntity.ok(cocheHibridoService.saveCocheHibrido(cocheHibrido));
 
     }
 

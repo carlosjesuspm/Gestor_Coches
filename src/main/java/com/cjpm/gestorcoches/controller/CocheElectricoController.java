@@ -34,9 +34,6 @@ public class CocheElectricoController {
     }
 
 
-
-
-
     /**
      * Devuelve todos los coches eléctricos
      * @return CocheElectricoDTO
@@ -84,7 +81,7 @@ public class CocheElectricoController {
     /**
      * Método que guarda un coche eléctrico creado
      * @param cocheElectricoDTO -
-     * @return ResponseEntity<CocheElectricoDTO>
+     * @return ResponseEntity<CocheElectrico>
      */
 
     @PostMapping("/coches_electricos")

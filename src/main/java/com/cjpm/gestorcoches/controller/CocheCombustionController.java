@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -84,16 +85,16 @@ public class CocheCombustionController {
     /**
      * Método que guarda un coche de combustión creado
      * @param cocheCombustionDTO -
-     * @return ResponseEntity<CocheCombustionDTO>
+     * @return ResponseEntity<CocheCombustion>
      */
     @PostMapping("/coches_combustion")
-    public ResponseEntity<CocheCombustionDTO> saveCocheCombustion(@RequestBody CocheCombustionDTO cocheCombustionDTO){
-        CocheCombustion cocheCombustion=(CocheCombustion) dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
-        if(cocheCombustion.getIdCoche()!=1L){
+    public ResponseEntity<CocheCombustion> createCocheCombustion(@RequestBody CocheCombustionDTO cocheCombustionDTO) throws ParseException {
+        CocheCombustion cocheCombustion=dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
+        if(cocheCombustion.getIdCoche()!=0){
             throw new IllegalArgumentException("El ID del coche de combustión no es válido");
         }
-        cocheCombustionService.saveCocheCombustion(cocheCombustion);
-        return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheCombustion, CocheCombustionDTO.class));
+
+        return ResponseEntity.ok(cocheCombustionService.saveCocheCombustion(cocheCombustion));
     }
 
     /**
