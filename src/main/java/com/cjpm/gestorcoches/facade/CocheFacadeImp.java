@@ -3,6 +3,9 @@ package com.cjpm.gestorcoches.facade;
 import com.cjpm.gestorcoches.dto.CocheCombustionDTO;
 import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
 import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
+import com.cjpm.gestorcoches.entities.CocheCombustion;
+import com.cjpm.gestorcoches.entities.CocheElectrico;
+import com.cjpm.gestorcoches.entities.CocheHibrido;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CocheFacadeImp implements ICocheFacade{
     @Override
-    public CocheElectricoDTO startCocheElectrico(CocheElectricoDTO cocheDTO) {
+    public CocheElectricoDTO startCocheElectrico(CocheElectrico coche) {
+        CocheElectricoDTO cocheDTO = new CocheElectricoDTO(coche);
         cocheDTO.encenderAireAcondicionado();
         cocheDTO.encederBateria();
         cocheDTO.encenderMotor();
@@ -21,7 +25,8 @@ public class CocheFacadeImp implements ICocheFacade{
     }
 
     @Override
-    public CocheHibridoDTO startCocheHibrido(CocheHibridoDTO cocheDTO) {
+    public CocheHibridoDTO startCocheHibrido(CocheHibrido coche) {
+        CocheHibridoDTO cocheDTO = new CocheHibridoDTO(coche);
         cocheDTO.encenderAireAcondicionado();
         cocheDTO.encederBateria();
         cocheDTO.encenderMotor();
@@ -30,7 +35,8 @@ public class CocheFacadeImp implements ICocheFacade{
     }
 
     @Override
-    public CocheCombustionDTO startCocheCombustion(CocheCombustionDTO cocheDTO) {
+    public CocheCombustionDTO startCocheCombustion(CocheCombustion coche) {
+        CocheCombustionDTO cocheDTO=new CocheCombustionDTO(coche);
         cocheDTO.encenderAireAcondicionado();
         cocheDTO.encederBateria();
         cocheDTO.encenderMotor();

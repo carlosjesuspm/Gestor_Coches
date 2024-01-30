@@ -9,23 +9,20 @@ public class CocheElectricoDTO extends CocheDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private boolean bateriaElectrica;
+    private boolean bateriaElectrica=true;
 
     public CocheElectricoDTO() {
 
     }
 
-    public CocheElectricoDTO(CocheElectrico cocheElectrico) {
-
-    }
-
-    public CocheElectricoDTO(boolean bateriaElectrica) {
-        this.bateriaElectrica = bateriaElectrica;
-    }
-
     public CocheElectricoDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, boolean bateriaElectrica) {
         super(idCoche, marca, modelo, color, aireAcondicionado, motor, bateria);
         this.bateriaElectrica = bateriaElectrica;
+    }
+
+    public CocheElectricoDTO(CocheElectrico cocheElectrico){
+        super();
+        this.bateriaElectrica=cocheElectrico.isBateriaElectrica();
     }
 
     public boolean isBateriaElectrica() {

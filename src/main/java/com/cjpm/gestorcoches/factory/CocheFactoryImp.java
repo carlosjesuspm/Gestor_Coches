@@ -5,6 +5,9 @@ import com.cjpm.gestorcoches.dto.CocheCombustionDTO;
 import com.cjpm.gestorcoches.dto.CocheDTO;
 import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
 import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
+import com.cjpm.gestorcoches.entities.CocheCombustion;
+import com.cjpm.gestorcoches.entities.CocheElectrico;
+import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.facade.CocheFacadeImp;
 import org.springframework.stereotype.Component;
 
@@ -15,22 +18,22 @@ public class CocheFactoryImp implements ICocheFactory{
 
     /**
      * Llama a los métodos de la Facade para crear los objetos
-     * @param cocheDTO -
+     * @param coche -
      *
      */
     @Override
-    public CocheElectricoDTO obtenerAutomovilElectrico(CocheElectricoDTO cocheDTO){
-            return cocheFacade.startCocheElectrico(cocheDTO);
+    public CocheElectricoDTO obtenerAutomovilElectrico(CocheElectrico coche){
+            return cocheFacade.startCocheElectrico(coche);
         };
 
     @Override
-    public CocheHibridoDTO obtenerAutomovilHibrido(CocheHibridoDTO cocheDTO) {
-        return cocheFacade.startCocheHibrido(cocheDTO);
+    public CocheHibridoDTO obtenerAutomovilHibrido(CocheHibrido coche) {
+        return cocheFacade.startCocheHibrido(coche);
     }
 
     @Override
-    public CocheCombustionDTO obtenerAutomovilCombustion(CocheCombustionDTO cocheDTO) {
-        return cocheFacade.startCocheCombustion(cocheDTO);
+    public CocheCombustionDTO obtenerAutomovilCombustion(CocheCombustion coche) {
+        return cocheFacade.startCocheCombustion(coche);
     }
 
 }

@@ -11,7 +11,7 @@ public class CocheHibrido extends Coche {
 
 
     @Column(name = "tanque_hidrogeno")
-    private boolean tanqueHidrogeno;
+    private boolean tanqueHidrogeno=true;
 
     public CocheHibrido() {
     }

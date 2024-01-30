@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 public class CocheElectrico extends Coche {
 
     @Column(name = "bateria_electrica")
-    private boolean bateriaElectrica;
+    private boolean bateriaElectrica=true;
 
     public CocheElectrico() {
     }

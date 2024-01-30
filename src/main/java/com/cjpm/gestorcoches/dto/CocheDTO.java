@@ -2,6 +2,8 @@ package com.cjpm.gestorcoches.dto;
 
 
 
+import com.cjpm.gestorcoches.entities.Coche;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -27,7 +29,6 @@ public abstract class CocheDTO implements Serializable, IFuncionesCoche {
     public CocheDTO() {
     }
 
-
     public CocheDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionadoEncendido, Boolean motorEncendido, Boolean bateriaEncendida) {
         this.idCoche = idCoche;
         this.marca = marca;
@@ -36,6 +37,16 @@ public abstract class CocheDTO implements Serializable, IFuncionesCoche {
         this.aireAcondicionadoEncendido = aireAcondicionadoEncendido;
         this.motorEncendido = motorEncendido;
         this.bateriaEncendida = bateriaEncendida;
+    }
+
+    public CocheDTO(Coche coche) {
+        this.idCoche = coche.getIdCoche();
+        this.marca = coche.getMarca();
+        this.modelo = coche.getModelo();
+        this.color = coche.getColor();
+        this.aireAcondicionadoEncendido = coche.getAireAcondicionadoEncendido();
+        this.motorEncendido = coche.getMotorEncendido();
+        this.bateriaEncendida = coche.getBateriaEncendida();
     }
 
     //Getters y Setters
@@ -96,14 +107,14 @@ public abstract class CocheDTO implements Serializable, IFuncionesCoche {
     }
 
     //Funciones Coche
-    public boolean encenderAireAcondicionado(){
-        return aireAcondicionadoEncendido =true;
+    public void encenderAireAcondicionado(){
+        aireAcondicionadoEncendido = true;
     };
-    public boolean encederBateria(){
-        return bateriaEncendida =true;
+    public void encederBateria(){
+        bateriaEncendida = true;
     };
-    public boolean encenderMotor(){
-        return motorEncendido =true;
+    public void encenderMotor(){
+        motorEncendido = true;
     };
 
     @Override

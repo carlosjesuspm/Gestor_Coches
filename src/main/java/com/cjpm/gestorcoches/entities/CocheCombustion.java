@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 public class CocheCombustion extends Coche  {
 
     @Column(name = "motor_combustion")
-    private boolean motorCombustion;
+    private boolean motorCombustion=true;
 
     public CocheCombustion() {
     }

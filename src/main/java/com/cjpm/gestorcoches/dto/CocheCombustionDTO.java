@@ -14,16 +14,15 @@ public class CocheCombustionDTO extends CocheDTO implements Serializable {
     public CocheCombustionDTO() {
 
     }
-    public CocheCombustionDTO(boolean motorCombustion) {
-        this.motorCombustion = motorCombustion;
-    }
-    public CocheCombustionDTO(CocheCombustion cocheCombustion) {
-
-    }
 
     public CocheCombustionDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, boolean motorCombustion) {
         super(idCoche, marca, modelo, color, aireAcondicionado, motor, bateria);
         this.motorCombustion = motorCombustion;
+    }
+
+    public CocheCombustionDTO(CocheCombustion cocheCombustion) {
+        super();
+        this.motorCombustion=cocheCombustion.isMotorCombustion();
     }
 
     public boolean isMotorCombustion() {

@@ -44,7 +44,6 @@ public class CocheElectricoController {
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
 
         return listaCochesElectricos.stream()
-                .map(CocheElectricoDTO::new)
                 .map(cocheFactory::obtenerAutomovilElectrico)
                 .collect(Collectors.toList());
     }

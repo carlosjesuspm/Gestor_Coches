@@ -8,23 +8,20 @@ import java.io.Serializable;
 public class CocheHibridoDTO extends CocheDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private boolean tanqueHidrogeno;
+    private boolean tanqueHidrogeno=true;
 
     public CocheHibridoDTO() {
 
     }
 
-    public CocheHibridoDTO(CocheHibrido cocheHibrido) {
-
-    }
-
-    public CocheHibridoDTO(boolean tanqueHidrogeno) {
-        this.tanqueHidrogeno = tanqueHidrogeno;
-    }
-
     public CocheHibridoDTO(long idCoche, String marca, String modelo, String color, Boolean aireAcondicionado, Boolean motor, Boolean bateria, boolean tanqueHidrogeno) {
         super(idCoche, marca, modelo, color, aireAcondicionado, motor, bateria);
         this.tanqueHidrogeno = tanqueHidrogeno;
+    }
+
+    public CocheHibridoDTO(CocheHibrido cocheHibrido) {
+        super();
+        this.tanqueHidrogeno=cocheHibrido.isTanqueHidrogeno();
     }
 
     public boolean isTanqueHidrogeno() {
