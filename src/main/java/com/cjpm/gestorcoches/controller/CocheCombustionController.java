@@ -46,7 +46,7 @@ public class CocheCombustionController {
         List<CocheCombustion> listaCochesCombustion=cocheCombustionService.findAllCocheCombustion();
 
         return listaCochesCombustion.stream()
-                .map(cocheCombustion -> dtoConverter.convertEntityToDTO(listaCochesCombustion, CocheCombustionDTO.class))
+                .map(cocheFactory::obtenerAutomovilCombustion)
                 .collect(Collectors.toList());
 
     }

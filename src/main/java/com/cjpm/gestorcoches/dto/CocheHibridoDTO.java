@@ -1,5 +1,6 @@
 package com.cjpm.gestorcoches.dto;
 
+import com.cjpm.gestorcoches.entities.Coche;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 
 import java.io.Serial;
@@ -19,9 +20,9 @@ public class CocheHibridoDTO extends CocheDTO implements Serializable {
         this.tanqueHidrogeno = tanqueHidrogeno;
     }
 
-    public CocheHibridoDTO(CocheHibrido cocheHibrido) {
-        super();
-        this.tanqueHidrogeno=cocheHibrido.isTanqueHidrogeno();
+    public CocheHibridoDTO(Coche coche, boolean tanqueHidrogeno) {
+        super(coche);
+        this.tanqueHidrogeno=tanqueHidrogeno;
     }
 
     public boolean isTanqueHidrogeno() {

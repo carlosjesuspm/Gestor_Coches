@@ -46,7 +46,7 @@ public class CocheHibridoController {
         List<CocheHibrido> listaCochesHibridos = cocheHibridoService.findAllCocheHibrido();
 
         return listaCochesHibridos.stream()
-                .map(cocheHibrido -> dtoConverter.convertEntityToDTO(listaCochesHibridos, CocheHibridoDTO.class))
+                .map(cocheFactory::obtenerAutomovilHibrido)
                 .collect(Collectors.toList());
     }
 

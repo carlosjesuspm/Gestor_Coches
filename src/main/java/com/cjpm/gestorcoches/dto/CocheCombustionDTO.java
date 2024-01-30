@@ -1,5 +1,6 @@
 package com.cjpm.gestorcoches.dto;
 
+import com.cjpm.gestorcoches.entities.Coche;
 import com.cjpm.gestorcoches.entities.CocheCombustion;
 
 import java.io.Serial;
@@ -20,9 +21,9 @@ public class CocheCombustionDTO extends CocheDTO implements Serializable {
         this.motorCombustion = motorCombustion;
     }
 
-    public CocheCombustionDTO(CocheCombustion cocheCombustion) {
-        super();
-        this.motorCombustion=cocheCombustion.isMotorCombustion();
+    public CocheCombustionDTO(Coche coche, boolean motorCombustion) {
+        super(coche);
+        this.motorCombustion=motorCombustion;
     }
 
     public boolean isMotorCombustion() {

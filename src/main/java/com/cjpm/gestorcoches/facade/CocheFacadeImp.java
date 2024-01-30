@@ -26,7 +26,7 @@ public class CocheFacadeImp implements ICocheFacade{
 
     @Override
     public CocheHibridoDTO startCocheHibrido(CocheHibrido coche) {
-        CocheHibridoDTO cocheDTO = new CocheHibridoDTO(coche);
+        CocheHibridoDTO cocheDTO = new CocheHibridoDTO(coche, true);
         cocheDTO.encenderAireAcondicionado();
         cocheDTO.encederBateria();
         cocheDTO.encenderMotor();
@@ -36,7 +36,7 @@ public class CocheFacadeImp implements ICocheFacade{
 
     @Override
     public CocheCombustionDTO startCocheCombustion(CocheCombustion coche) {
-        CocheCombustionDTO cocheDTO=new CocheCombustionDTO(coche);
+        CocheCombustionDTO cocheDTO=new CocheCombustionDTO(coche, true);
         cocheDTO.encenderAireAcondicionado();
         cocheDTO.encederBateria();
         cocheDTO.encenderMotor();
