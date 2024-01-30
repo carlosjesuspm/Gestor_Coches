@@ -36,11 +36,11 @@ public class CocheHibridoController {
     }
 
 
-
     /**
      * Devuelve todos los coches híbridos
      * @return CocheHibridoDTO
      */
+
     @GetMapping("/coches_hibridos")
     public List<CocheHibridoDTO> findAll(){
         List<CocheHibrido> listaCochesHibridos = cocheHibridoService.findAllCocheHibrido();
@@ -50,39 +50,30 @@ public class CocheHibridoController {
                 .collect(Collectors.toList());
     }
 
+
     /**
      * Devuelve el coche híbrido que solicita el cliente
      * @param id - id del coche híbrido
      * @return CocheHibridoDTO
      */
+
     @GetMapping("/coches_hibridos/{id}")
     public ResponseEntity<CocheHibridoDTO> findById(@PathVariable long id){
         Optional<CocheHibrido> cocheHibridoOpt= cocheHibridoService.findCocheHibridoById(id);
-
-        return cocheHibridoOpt.map(cocheHibrido -> {
-            CocheHibridoDTO cocheHibridoDTO = new CocheHibridoDTO();
-            cocheHibridoDTO.setIdCoche(cocheHibrido.getIdCoche());
-            cocheHibridoDTO.setTanqueHidrogeno(cocheHibrido.isTanqueHidrogeno());
-            cocheHibridoDTO.setMarca(cocheHibrido.getMarca());
-            cocheHibridoDTO.setBateriaEncendida(cocheHibrido.getBateriaEncendida());
-            cocheHibridoDTO.setModelo(cocheHibrido.getModelo());
-            cocheHibridoDTO.setColor(cocheHibrido.getColor());
-            cocheHibridoDTO.setAireAcondicionadoEncendido(cocheHibrido.getAireAcondicionadoEncendido());
-            cocheHibridoDTO.setMotorEncendido(cocheHibrido.getMotorEncendido());
-            cocheHibridoDTO.encenderAireAcondicionado();
-            cocheHibridoDTO.encederBateria();
-            cocheHibridoDTO.encenderMotor();
-
-            return ResponseEntity.ok(cocheHibridoDTO);
-
-        }).orElseGet(()-> ResponseEntity.notFound().build());
+        if(cocheHibridoOpt.isPresent()){
+            return ResponseEntity.ok(cocheHibridoOpt
+                    .map(cocheFactory::obtenerAutomovilHibrido).orElse(null));
+        }
+        return ResponseEntity.notFound().build();
     }
+
 
     /**
      * Método que guarda un coche creado
      * @param cocheHibridoDTO -
      * @return ResponseEntity<CocheHibrido>
      */
+
     @PostMapping("/coches_hibridos")
     public ResponseEntity<CocheHibrido> createCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO) throws ParseException{
         CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
@@ -92,6 +83,7 @@ public class CocheHibridoController {
         return ResponseEntity.ok(cocheHibridoService.saveCocheHibrido(cocheHibrido));
 
     }
+
 
     /**
      * Actualizar coche híbrido

@@ -59,7 +59,7 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
         if(id==null || id<=0){
             return Optional.empty();
         }
-        return Optional.of(cocheElectricoRepository.findById(id).get());
+        return cocheElectricoRepository.findById(id);
 
     }
 

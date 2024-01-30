@@ -35,12 +35,11 @@ public class CocheCombustionController {
     }
 
 
-
-
     /**
      * Devuelve todos los coches de combustión
      * @return CocheCombustionDTO
      */
+
     @GetMapping("/coches_combustion")
     public List<CocheCombustionDTO> findAll(){
         List<CocheCombustion> listaCochesCombustion=cocheCombustionService.findAllCocheCombustion();
@@ -52,34 +51,20 @@ public class CocheCombustionController {
     }
 
 
-
     /**
      * Devuelve el coche de combustión que solicita el cliente
      * @param id -
      * @return CocheCombustionDTO
      */
+
     @GetMapping("/coches_combustion/{id}")
     public ResponseEntity<CocheCombustionDTO> findById(@PathVariable long id){
         Optional<CocheCombustion> cocheCombustionOpt= cocheCombustionService.findCocheCombustionById(id);
-
-        return cocheCombustionOpt.map(cocheCombustion -> {
-            CocheCombustionDTO cocheCombustionDTO = new CocheCombustionDTO();
-            cocheCombustionDTO.setIdCoche(cocheCombustion.getIdCoche());
-            cocheCombustionDTO.setMotorCombustion(cocheCombustion.isMotorCombustion());
-            cocheCombustionDTO.setMarca(cocheCombustion.getMarca());
-            cocheCombustionDTO.setBateriaEncendida(cocheCombustion.getBateriaEncendida());
-            cocheCombustionDTO.setModelo(cocheCombustion.getModelo());
-            cocheCombustionDTO.setColor(cocheCombustion.getColor());
-            cocheCombustionDTO.setAireAcondicionadoEncendido(cocheCombustion.getAireAcondicionadoEncendido());
-            cocheCombustionDTO.setMotorEncendido(cocheCombustion.getMotorEncendido());
-            cocheCombustionDTO.encenderAireAcondicionado();
-            cocheCombustionDTO.encenderMotor();
-            cocheCombustionDTO.encederBateria();
-
-            return ResponseEntity.ok(cocheCombustionDTO);
-
-        }).orElseGet(()-> ResponseEntity.notFound().build());
-
+        if(cocheCombustionOpt.isPresent()){
+            return ResponseEntity.ok(cocheCombustionOpt
+                    .map(cocheFactory::obtenerAutomovilCombustion).orElse(null));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     /**
@@ -87,6 +72,7 @@ public class CocheCombustionController {
      * @param cocheCombustionDTO -
      * @return ResponseEntity<CocheCombustion>
      */
+
     @PostMapping("/coches_combustion")
     public ResponseEntity<CocheCombustion> createCocheCombustion(@RequestBody CocheCombustionDTO cocheCombustionDTO) throws ParseException {
         CocheCombustion cocheCombustion=dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
@@ -96,6 +82,9 @@ public class CocheCombustionController {
 
         return ResponseEntity.ok(cocheCombustionService.saveCocheCombustion(cocheCombustion));
     }
+
+
+
 
     /**
      * Actulizar coche de combustión

@@ -39,6 +39,7 @@ public class CocheElectricoController {
      * Devuelve todos los coches eléctricos
      * @return CocheElectricoDTO
      */
+
     @GetMapping("/coches_electricos")
     public List<CocheElectricoDTO> findAll(){
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
@@ -54,30 +55,19 @@ public class CocheElectricoController {
      * @param id -
      * @return CocheElectricoDTO
      */
+
     @GetMapping("/coches_electricos/{id}")
     public ResponseEntity<CocheElectricoDTO> findById(@PathVariable Long id){
         Optional<CocheElectrico> cocheElectricoOpt= cocheElectricoService.findCocheElectricoById(id);
 
-        return cocheElectricoOpt.map(cocheElectrico -> {
-                    CocheElectricoDTO cocheElectricoDTO = new CocheElectricoDTO();
-                    cocheElectricoDTO.setIdCoche(cocheElectrico.getIdCoche());
-                    cocheElectricoDTO.setBateriaElectrica(cocheElectrico.isBateriaElectrica());
-                    cocheElectricoDTO.setMarca(cocheElectrico.getMarca());
-                    cocheElectricoDTO.setBateriaEncendida(cocheElectrico.getBateriaEncendida());
-                    cocheElectricoDTO.setModelo(cocheElectrico.getModelo());
-                    cocheElectricoDTO.setColor(cocheElectrico.getColor());
-                    cocheElectricoDTO.setAireAcondicionadoEncendido(cocheElectrico.getAireAcondicionadoEncendido());
-                    cocheElectricoDTO.setMotorEncendido(cocheElectrico.getMotorEncendido());
-                    cocheElectricoDTO.encenderAireAcondicionado();
-                    cocheElectricoDTO.encederBateria();
-                    cocheElectricoDTO.encenderMotor();
-
-                    return ResponseEntity.ok(cocheElectricoDTO);
-
-                }).orElseGet(()-> ResponseEntity.notFound().build());
-
+        if(cocheElectricoOpt.isPresent()){
+            return ResponseEntity.ok(cocheElectricoOpt
+                    .map(cocheFactory::obtenerAutomovilElectrico).orElse(null));
+        }
+        return ResponseEntity.notFound().build();
 
     }
+
 
     /**
      * Método que guarda un coche eléctrico creado
@@ -96,6 +86,7 @@ public class CocheElectricoController {
         return ResponseEntity.ok(cocheElectricoService.saveCocheElectrico(cocheElectrico));
 
     }
+
 
     /**
      * Actualizar coche eléctrico
