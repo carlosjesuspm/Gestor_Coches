@@ -2,10 +2,12 @@ package com.cjpm.gestorcoches.dto;
 
 import com.cjpm.gestorcoches.entities.CocheElectrico;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class CocheElectricoDTO extends CocheDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private boolean bateriaElectrica;
 

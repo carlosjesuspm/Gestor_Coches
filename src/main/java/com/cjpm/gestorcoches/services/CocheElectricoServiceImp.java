@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.cjpm.gestorcoches.factory.CocheType.*;
-
 @Service
 public class CocheElectricoServiceImp implements ICocheElectricoService{
 

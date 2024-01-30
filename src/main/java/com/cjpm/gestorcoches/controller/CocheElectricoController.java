@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @RestController
 @RequestMapping("/api")
 public class CocheElectricoController {
@@ -23,7 +24,7 @@ public class CocheElectricoController {
 
 
     private final CocheElectricoServiceImp cocheElectricoService;
-    private CocheFactoryImp cocheFactory;
+    private final CocheFactoryImp cocheFactory;
     private final DTOConverter dtoConverter;
 
     @Autowired
@@ -43,7 +44,8 @@ public class CocheElectricoController {
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
 
         return listaCochesElectricos.stream()
-                .map(cocheElectrico->dtoConverter.convertEntityToDTO(listaCochesElectricos,CocheElectricoDTO.class))
+                .map(CocheElectricoDTO::new)
+                .map(cocheFactory::obtenerAutomovilElectrico)
                 .collect(Collectors.toList());
     }
 

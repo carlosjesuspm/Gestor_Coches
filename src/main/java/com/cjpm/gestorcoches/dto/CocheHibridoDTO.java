@@ -1,14 +1,23 @@
 package com.cjpm.gestorcoches.dto;
 
+import com.cjpm.gestorcoches.entities.CocheHibrido;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 public class CocheHibridoDTO extends CocheDTO implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private boolean tanqueHidrogeno;
 
     public CocheHibridoDTO() {
 
     }
+
+    public CocheHibridoDTO(CocheHibrido cocheHibrido) {
+
+    }
+
     public CocheHibridoDTO(boolean tanqueHidrogeno) {
         this.tanqueHidrogeno = tanqueHidrogeno;
     }

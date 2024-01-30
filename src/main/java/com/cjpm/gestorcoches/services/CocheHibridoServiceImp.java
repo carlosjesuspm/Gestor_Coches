@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.cjpm.gestorcoches.factory.CocheType.COCHE_HIBRIDO;
 
 @Service
 public class CocheHibridoServiceImp implements ICocheHibridoService{

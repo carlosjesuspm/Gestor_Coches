@@ -2,10 +2,12 @@ package com.cjpm.gestorcoches.dto;
 
 import com.cjpm.gestorcoches.entities.CocheCombustion;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class CocheCombustionDTO extends CocheDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     private boolean motorCombustion;
 

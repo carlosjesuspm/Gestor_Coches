@@ -2,10 +2,12 @@ package com.cjpm.gestorcoches.dto;
 
 
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public abstract class CocheDTO implements Serializable, IFuncionesCoche {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     //Atributos
