@@ -1,5 +1,6 @@
 package com.cjpm.gestorcoches.dto;
 
+import com.cjpm.gestorcoches.entities.Coche;
 import com.cjpm.gestorcoches.entities.CocheElectrico;
 
 import java.io.Serial;
@@ -20,9 +21,9 @@ public class CocheElectricoDTO extends CocheDTO implements Serializable {
         this.bateriaElectrica = bateriaElectrica;
     }
 
-    public CocheElectricoDTO(CocheElectrico cocheElectrico){
-        super();
-        this.bateriaElectrica=cocheElectrico.isBateriaElectrica();
+    public CocheElectricoDTO(Coche coche,boolean bateriaElectrica){
+        super(coche);
+        this.bateriaElectrica = bateriaElectrica;
     }
 
     public boolean isBateriaElectrica() {

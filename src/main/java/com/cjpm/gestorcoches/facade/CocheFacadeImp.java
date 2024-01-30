@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class CocheFacadeImp implements ICocheFacade{
     @Override
     public CocheElectricoDTO startCocheElectrico(CocheElectrico coche) {
-        CocheElectricoDTO cocheDTO = new CocheElectricoDTO(coche);
+        CocheElectricoDTO cocheDTO = new CocheElectricoDTO(coche, true);
         cocheDTO.encenderAireAcondicionado();
         cocheDTO.encederBateria();
         cocheDTO.encenderMotor();
