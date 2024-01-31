@@ -102,7 +102,6 @@ public class CocheElectricoController {
 
         CocheElectrico cocheElectrico = dtoConverter.convertDTOToEntity(cocheElectricoDTO, CocheElectrico.class);
         cocheElectricoService.saveCocheElectrico(cocheElectrico);
-        System.out.println(cocheElectrico.toString());
         return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheElectrico, CocheElectricoDTO.class));
     }
 

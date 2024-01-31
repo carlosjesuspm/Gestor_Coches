@@ -96,7 +96,7 @@ public class CocheCombustionController {
         if(cocheCombustionDTO.getIdCoche()!=1L){
             throw new IllegalArgumentException("El ID del coche de combustión no es válido para la actualización");
         }
-        CocheCombustion cocheCombustion=(CocheCombustion) dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
+        CocheCombustion cocheCombustion=dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
         cocheCombustionService.saveCocheCombustion(cocheCombustion);
         return ResponseEntity.ok(dtoConverter.convertEntityToDTO(cocheCombustion, CocheCombustionDTO.class));
     }
