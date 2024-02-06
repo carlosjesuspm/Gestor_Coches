@@ -1,6 +1,8 @@
 package com.cjpm.gestorcoches.controller;
 
+import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
 import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
+import com.cjpm.gestorcoches.entities.CocheElectrico;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.exception.CocheBadRequestException;
 import com.cjpm.gestorcoches.exception.CocheGlobalException;
@@ -9,6 +11,11 @@ import com.cjpm.gestorcoches.exception.CocheNotFoundException;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheHibridoServiceImp;
 import com.cjpm.gestorcoches.config.DTOConverter;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +52,11 @@ public class CocheHibridoController {
      * Devuelve todos los coches híbridos
      * @return CocheHibridoDTO
      */
-
+    @Operation(summary = "Mostrar listado de coches híbridos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Listado encontrado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheHibridoDTO.class))}),
+            @ApiResponse(responseCode = "204", description = "Lista devuelta vacía", content = @Content)
+    })
     @GetMapping("/coches_hibridos")
     public ResponseEntity<List<CocheHibridoDTO>> findAll(){
         List<CocheHibrido> listaCochesHibridos = cocheHibridoService.findAllCocheHibrido();
@@ -65,7 +76,11 @@ public class CocheHibridoController {
      * @param id - id del coche híbrido
      * @return ResponseEntity<CocheHibridoDTO>
      */
-
+    @Operation(summary = "Mostrar coche híbrido por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coche encontrado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheHibridoDTO.class))}),
+            @ApiResponse(responseCode = "404", description = "Coche no encontrado", content = @Content)
+    })
     @GetMapping("/coches_hibridos/{id}")
     public ResponseEntity<CocheHibridoDTO> findById(@PathVariable long id){
         Optional<CocheHibrido> cocheHibridoOpt= cocheHibridoService.findCocheHibridoById(id);
@@ -81,7 +96,11 @@ public class CocheHibridoController {
      * @return ResponseEntity<CocheHibrido>
      * @throws ParseException -
      */
-
+    @Operation(summary = "Crear coche híbrido")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coche creado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheHibrido.class))}),
+            @ApiResponse(responseCode = "500", description = "Coche errónea creado con campo id", content = @Content)
+    })
     @PostMapping("/coches_hibridos")
     public ResponseEntity<CocheHibrido> createCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO) throws ParseException{
         CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
@@ -97,6 +116,11 @@ public class CocheHibridoController {
      * @param cocheHibridoDTO -
      * @return ResponseEntity<CocheHibridoDTO>
      */
+    @Operation(summary = "Actualizar coche híbrido")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coche actualizado y, si no existe, coche nuevo creado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheHibridoDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "No se ha podido llevar a cabo la actualización", content = @Content)
+    })
     @PutMapping("/coches_hibridos")
     public ResponseEntity<CocheHibridoDTO> updateCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO){
         if(cocheHibridoDTO.getIdCoche()==0) {
@@ -113,8 +137,13 @@ public class CocheHibridoController {
      * @param id - id del coche híbrido
      * @return ResponseEntity<CocheHibrido>
      */
+    @Operation(summary = "Eliminar coche híbrido por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Coche borrado correctamente",content = @Content),
+            @ApiResponse(responseCode = "404", description = "No se ha encontrado coche con el id solicitado y, por lo tanto, no puede borrarse", content = @Content)
+    })
     @DeleteMapping("/coches_hibridos/{id}")
-    public ResponseEntity<CocheHibrido> deleteCocheHibrido(@PathVariable Long id){
+    public ResponseEntity<HttpStatus> deleteCocheHibrido(@PathVariable Long id){
         boolean result=cocheHibridoService.deleteCocheHibridoById(id);
         if(result){
             throw new CocheNoContentException("Se ha borrado correctamente el coche con el id: " + id);
@@ -126,8 +155,13 @@ public class CocheHibridoController {
      * Borrar todos los coches híbridos
      * @return ResponseEntity<CocheHibrido>
      */
+    @Operation(summary = "Eliminar listado de coches híbridos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Listado borrado correctamente",content = @Content),
+            @ApiResponse(responseCode = "500", description = "No se ha podido borrar el listado de coches", content = @Content)
+    })
     @DeleteMapping("/coches_hibridos")
-    public ResponseEntity<CocheHibrido> deleteAllCocheHibrido(){
+    public ResponseEntity<HttpStatus> deleteAllCocheHibrido(){
         boolean result = cocheHibridoService.deleteAllCocheHibrido();
         if(result){
             throw new CocheNoContentException("La lista se ha borrado correctamente");

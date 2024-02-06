@@ -1,8 +1,6 @@
 package com.cjpm.gestorcoches.dto;
 
 import com.cjpm.gestorcoches.entities.Coche;
-import com.cjpm.gestorcoches.entities.CocheCombustion;
-
 import java.io.Serial;
 import java.io.Serializable;
 

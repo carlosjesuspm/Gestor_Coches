@@ -1,7 +1,6 @@
 package com.cjpm.gestorcoches.dto;
 
 import com.cjpm.gestorcoches.entities.Coche;
-import com.cjpm.gestorcoches.entities.CocheHibrido;
 
 import java.io.Serial;
 import java.io.Serializable;

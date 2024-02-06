@@ -23,9 +23,11 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
   * Versión: 21
 * Framework: Spring
 * Design Patterns: Factory y Facade
-* JavaDoc
-* Swagger
-* Postman (Pruebas de integración para testeo de la APIRest)
+* Documentación:
+  * JavaDoc
+  * Swagger
+* Testing de integración:
+* Postman
 * Depedencias:
   * JPA
   * Jersey (JAX-RS) para RESTful Web Services. 

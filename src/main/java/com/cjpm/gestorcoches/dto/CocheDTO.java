@@ -1,7 +1,5 @@
 package com.cjpm.gestorcoches.dto;
 
-
-
 import com.cjpm.gestorcoches.entities.Coche;
 
 import java.io.Serial;

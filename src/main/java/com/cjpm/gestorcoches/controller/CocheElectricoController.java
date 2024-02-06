@@ -9,6 +9,11 @@ import com.cjpm.gestorcoches.exception.CocheNotFoundException;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheElectricoServiceImp;
 import com.cjpm.gestorcoches.config.DTOConverter;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +50,11 @@ public class CocheElectricoController {
      * @return ResponseEntity<List<CocheElectricoDTO>>
      */
 
+    @Operation(summary = "Mostrar listado de coches eléctricos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Listado encontrado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheElectricoDTO.class))}),
+            @ApiResponse(responseCode = "204", description = "Lista devuelta vacía", content = @Content)
+    })
     @GetMapping("/coches_electricos")
     public ResponseEntity<List<CocheElectricoDTO>> findAll(){
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
@@ -68,6 +78,11 @@ public class CocheElectricoController {
      * @return CocheElectricoDTO
      */
 
+    @Operation(summary = "Mostrar coche eléctrico por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coche encontrado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheElectricoDTO.class))}),
+            @ApiResponse(responseCode = "404", description = "Coche no encontrado", content = @Content)
+    })
     @GetMapping("/coches_electricos/{id}")
     public ResponseEntity<CocheElectricoDTO> findById(@PathVariable Long id){
         Optional<CocheElectrico> cocheElectricoOpt= cocheElectricoService.findCocheElectricoById(id);
@@ -86,6 +101,11 @@ public class CocheElectricoController {
      * @return ResponseEntity<CocheElectrico>
      */
 
+    @Operation(summary = "Crear coche eléctrico")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coche creado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheElectrico.class))}),
+            @ApiResponse(responseCode = "500", description = "Coche errónea creado con campo id", content = @Content)
+    })
     @PostMapping("/coches_electricos")
     public ResponseEntity<CocheElectrico> createCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
 
@@ -104,6 +124,11 @@ public class CocheElectricoController {
      * @param cocheElectricoDTO -
      * @return ResponseEntity<CocheElectrico>
      */
+    @Operation(summary = "Actualizar coche eléctrico")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Coche actualizado y, si no existe, coche nuevo creado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheElectricoDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "No se ha podido llevar a cabo la actualización", content = @Content)
+    })
     @PutMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> updateCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO){
         if(cocheElectricoDTO.getIdCoche()==0){
@@ -123,6 +148,11 @@ public class CocheElectricoController {
      * @param id - id del coche eléctrico
      * @return ResponseEntity<CocheElectrico>
      */
+    @Operation(summary = "Eliminar coche eléctrico por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Coche borrado correctamente",content = @Content),
+            @ApiResponse(responseCode = "404", description = "No se ha encontrado coche con el id solicitado y, por lo tanto, no puede borrarse", content = @Content)
+    })
     @DeleteMapping("/coches_electricos/{id}")
     public ResponseEntity<HttpStatus> deleteCocheElectrico(@PathVariable Long id){
         boolean result= cocheElectricoService.deleteCocheElectricoById(id);
@@ -136,6 +166,11 @@ public class CocheElectricoController {
      * Borrar todos los coches eléctricos
      * @return ResponseEntity<CocheElectrico>
      */
+    @Operation(summary = "Eliminar listado de coches eléctricos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Listado borrado correctamente",content = @Content),
+            @ApiResponse(responseCode = "500", description = "No se ha podido borrar el listado de coches", content = @Content)
+    })
     @DeleteMapping("/coches_electricos")
     public ResponseEntity<HttpStatus>deleteAllCocheElectrico(){
         boolean result= cocheElectricoService.deleteAllCocheElectrico();
