@@ -49,7 +49,7 @@ public class CocheCombustionController {
      * Devuelve todos los coches de combustión
      * @return ResponseEntity<List<CocheCombustionDTO>>
      */
-    @Operation(summary = "Mostrar listado de coches eléctricos")
+    @Operation(summary = "Mostrar listado de coches de combustión")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listado encontrado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheCombustionDTO.class))}),
             @ApiResponse(responseCode = "204", description = "Lista devuelta vacía", content = @Content)
@@ -95,7 +95,7 @@ public class CocheCombustionController {
      * @return ResponseEntity<CocheCombustion>
      */
 
-    @Operation(summary = "Crear coche eléctrico")
+    @Operation(summary = "Crear coche de combustión")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Coche creado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheCombustion.class))}),
             @ApiResponse(responseCode = "500", description = "Coche errónea creado con campo id", content = @Content)
@@ -116,7 +116,7 @@ public class CocheCombustionController {
      * @param cocheCombustionDTO -
      * @return ResponseEntity<CocheCombustionDTO>
      */
-    @Operation(summary = "Actualizar coche eléctrico")
+    @Operation(summary = "Actualizar coche de combustión")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Coche actualizado y, si no existe, coche nuevo creado",content = {@Content(mediaType="application/json",schema=@Schema(implementation = CocheCombustionDTO.class))}),
             @ApiResponse(responseCode = "400", description = "No se ha podido llevar a cabo la actualización", content = @Content)
