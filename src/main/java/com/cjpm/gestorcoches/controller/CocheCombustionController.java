@@ -3,9 +3,14 @@ package com.cjpm.gestorcoches.controller;
 import com.cjpm.gestorcoches.config.DTOConverter;
 import com.cjpm.gestorcoches.dto.CocheCombustionDTO;
 import com.cjpm.gestorcoches.entities.CocheCombustion;
+import com.cjpm.gestorcoches.exception.CocheBadRequestException;
+import com.cjpm.gestorcoches.exception.CocheGlobalException;
+import com.cjpm.gestorcoches.exception.CocheNoContentException;
+import com.cjpm.gestorcoches.exception.CocheNotFoundException;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheCombustionServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +29,7 @@ public class CocheCombustionController {
 
 
     private final CocheCombustionServiceImp cocheCombustionService;
-    private CocheFactoryImp cocheFactory;
+    private final CocheFactoryImp cocheFactory;
     private final DTOConverter dtoConverter;
 
     @Autowired
@@ -37,16 +42,20 @@ public class CocheCombustionController {
 
     /**
      * Devuelve todos los coches de combustión
-     * @return CocheCombustionDTO
+     * @return ResponseEntity<List<CocheCombustionDTO>>
      */
 
     @GetMapping("/coches_combustion")
-    public List<CocheCombustionDTO> findAll(){
+    public ResponseEntity<List<CocheCombustionDTO>> findAll(){
         List<CocheCombustion> listaCochesCombustion=cocheCombustionService.findAllCocheCombustion();
 
-        return listaCochesCombustion.stream()
+        if(listaCochesCombustion ==null ||listaCochesCombustion.isEmpty()){
+            throw new CocheNoContentException("La lista está vacía");
+        }
+        return new ResponseEntity<>(listaCochesCombustion.stream()
                 .map(cocheFactory::obtenerAutomovilCombustion)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()), HttpStatus.OK);
+
 
     }
 
@@ -54,17 +63,16 @@ public class CocheCombustionController {
     /**
      * Devuelve el coche de combustión que solicita el cliente
      * @param id -
-     * @return CocheCombustionDTO
+     * @return ResponseEntity<CocheCombustionDTO>
      */
 
     @GetMapping("/coches_combustion/{id}")
     public ResponseEntity<CocheCombustionDTO> findById(@PathVariable long id){
         Optional<CocheCombustion> cocheCombustionOpt= cocheCombustionService.findCocheCombustionById(id);
-        if(cocheCombustionOpt.isPresent()){
-            return ResponseEntity.ok(cocheCombustionOpt
-                    .map(cocheFactory::obtenerAutomovilCombustion).orElse(null));
-        }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<>(cocheCombustionOpt
+                .map(cocheFactory::obtenerAutomovilCombustion)
+                .orElseThrow(()->new CocheNotFoundException("No se ha encontrado el coche con el siguiente id: " + id)),
+                HttpStatus.OK);
     }
 
     /**
@@ -76,14 +84,12 @@ public class CocheCombustionController {
     @PostMapping("/coches_combustion")
     public ResponseEntity<CocheCombustion> createCocheCombustion(@RequestBody CocheCombustionDTO cocheCombustionDTO) throws ParseException {
         CocheCombustion cocheCombustion=dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
-        if(cocheCombustion.getIdCoche()==0){
-            throw new IllegalArgumentException("El ID del coche de combustión no es válido");
+        if(cocheCombustion.getIdCoche()!=0){
+            throw new CocheGlobalException("El campo del id debe estar vacío");
         }
 
         return ResponseEntity.ok(cocheCombustionService.saveCocheCombustion(cocheCombustion));
     }
-
-
 
 
     /**
@@ -93,8 +99,8 @@ public class CocheCombustionController {
      */
     @PutMapping("/coches_combustion")
     public ResponseEntity<CocheCombustionDTO> updateCocheCombustion(@RequestBody CocheCombustionDTO cocheCombustionDTO){
-        if(cocheCombustionDTO.getIdCoche()!=1L){
-            throw new IllegalArgumentException("El ID del coche de combustión no es válido para la actualización");
+        if(cocheCombustionDTO.getIdCoche()==0){
+            throw new CocheBadRequestException("No se ha podido atender la petición de actualización");
         }
         CocheCombustion cocheCombustion=dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
         cocheCombustionService.saveCocheCombustion(cocheCombustion);
@@ -110,18 +116,22 @@ public class CocheCombustionController {
     public ResponseEntity<CocheCombustion> deleteCocheCombustion(@PathVariable Long id){
         boolean result=cocheCombustionService.deleteCocheCombustionById(id);
         if(result){
-            return ResponseEntity.noContent().build();
+            throw new CocheNoContentException("Se ha borrado correctamente el coche con el id: " + id);
         }
-        return ResponseEntity.internalServerError().build();
+        throw new CocheNotFoundException("No se ha encontrado el coche con el id: " + id);
     }
 
+    /**
+     * Borra todos los coches de combustión
+     * @return ResponseEntity<CocheCombustion>
+     */
     @DeleteMapping("/coches_combustion")
     public ResponseEntity<CocheCombustion> deleteAllCocheCombustion(){
         boolean result = cocheCombustionService.deleteAllCocheCombustion();
         if(result){
-            return ResponseEntity.noContent().build();
+            throw new CocheNoContentException("La lista se ha borrado correctamente");
         }
-        return ResponseEntity.internalServerError().build();
+        throw new CocheGlobalException("Error al borrar todos los coches");
     }
 }
 

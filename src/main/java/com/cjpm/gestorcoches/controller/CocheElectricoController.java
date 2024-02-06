@@ -42,7 +42,7 @@ public class CocheElectricoController {
 
     /**
      * Devuelve todos los coches eléctricos
-     * @return CocheElectricoDTO
+     * @return ResponseEntity<List<CocheElectricoDTO>>
      */
 
     @GetMapping("/coches_electricos")

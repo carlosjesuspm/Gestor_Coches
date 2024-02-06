@@ -3,10 +3,14 @@ package com.cjpm.gestorcoches.controller;
 import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
 import com.cjpm.gestorcoches.exception.CocheBadRequestException;
+import com.cjpm.gestorcoches.exception.CocheGlobalException;
+import com.cjpm.gestorcoches.exception.CocheNoContentException;
+import com.cjpm.gestorcoches.exception.CocheNotFoundException;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheHibridoServiceImp;
 import com.cjpm.gestorcoches.config.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,29 +47,31 @@ public class CocheHibridoController {
      */
 
     @GetMapping("/coches_hibridos")
-    public List<CocheHibridoDTO> findAll(){
+    public ResponseEntity<List<CocheHibridoDTO>> findAll(){
         List<CocheHibrido> listaCochesHibridos = cocheHibridoService.findAllCocheHibrido();
 
-        return listaCochesHibridos.stream()
+        if(listaCochesHibridos==null||listaCochesHibridos.isEmpty()){
+            throw new CocheNoContentException("La lista está vacía");
+        }
+        return new ResponseEntity<>(listaCochesHibridos.stream()
                 .map(cocheFactory::obtenerAutomovilHibrido)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()),
+                HttpStatus.OK);
     }
 
 
     /**
      * Devuelve el coche híbrido que solicita el cliente
      * @param id - id del coche híbrido
-     * @return CocheHibridoDTO
+     * @return ResponseEntity<CocheHibridoDTO>
      */
 
     @GetMapping("/coches_hibridos/{id}")
     public ResponseEntity<CocheHibridoDTO> findById(@PathVariable long id){
         Optional<CocheHibrido> cocheHibridoOpt= cocheHibridoService.findCocheHibridoById(id);
-        if(cocheHibridoOpt.isPresent()){
-            return ResponseEntity.ok(cocheHibridoOpt
-                    .map(cocheFactory::obtenerAutomovilHibrido).orElse(null));
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(cocheHibridoOpt
+                .map(cocheFactory::obtenerAutomovilHibrido)
+                .orElseThrow(()->new CocheNotFoundException("No se ha encontrado el coche con el siguiente id: " + id)));
     }
 
 
@@ -73,13 +79,14 @@ public class CocheHibridoController {
      * Método que guarda un coche creado
      * @param cocheHibridoDTO -
      * @return ResponseEntity<CocheHibrido>
+     * @throws ParseException -
      */
 
     @PostMapping("/coches_hibridos")
     public ResponseEntity<CocheHibrido> createCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO) throws ParseException{
         CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
         if(cocheHibrido.getIdCoche()!=0) {
-            throw new CocheBadRequestException("Debe evitar añadir el campo id a la hora de guardar el nuevo coche");
+            throw new CocheGlobalException("El campo del id debe estar vacío");
         }
         return ResponseEntity.ok(cocheHibridoService.saveCocheHibrido(cocheHibrido));
     }
@@ -89,12 +96,11 @@ public class CocheHibridoController {
      * Actualizar coche híbrido
      * @param cocheHibridoDTO -
      * @return ResponseEntity<CocheHibridoDTO>
-     * @throws ParseException -
      */
     @PutMapping("/coches_hibridos")
-    public ResponseEntity<CocheHibridoDTO> updateCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO) throws ParseException{
-        if(cocheHibridoDTO.getIdCoche()!=1L) {
-            throw new IllegalArgumentException("El id de este coche híbrido ya está empleado");
+    public ResponseEntity<CocheHibridoDTO> updateCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO){
+        if(cocheHibridoDTO.getIdCoche()==0) {
+            throw new CocheBadRequestException("No se ha podido atender la petición de actualización");
         }
         CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
         cocheHibridoService.saveCocheHibrido(cocheHibrido);
@@ -111,9 +117,9 @@ public class CocheHibridoController {
     public ResponseEntity<CocheHibrido> deleteCocheHibrido(@PathVariable Long id){
         boolean result=cocheHibridoService.deleteCocheHibridoById(id);
         if(result){
-            return ResponseEntity.noContent().build();
+            throw new CocheNoContentException("Se ha borrado correctamente el coche con el id: " + id);
         }
-        return ResponseEntity.internalServerError().build();
+        throw new CocheNotFoundException("No se ha encontrado el coche con el id: " + id);
     }
 
     /**
@@ -124,8 +130,8 @@ public class CocheHibridoController {
     public ResponseEntity<CocheHibrido> deleteAllCocheHibrido(){
         boolean result = cocheHibridoService.deleteAllCocheHibrido();
         if(result){
-            return ResponseEntity.noContent().build();
+            throw new CocheNoContentException("La lista se ha borrado correctamente");
         }
-        return ResponseEntity.internalServerError().build();
+        throw new CocheGlobalException("Error al borrar todos los coches");
     }
 }
