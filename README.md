@@ -7,7 +7,7 @@ Existen tres tipos de coches: eléctrico, híbrido y de combustión.
 
 El controlador recibe el parámetro e invoca a un Factory Method que le proporciona el coche solicitado y lo devuelve como respuesta json.
 
-El factory Method utilizada una Fachada para la creación de coches, donde cada una está compuesto por diferentes piezas como batería, motor, aire acondicionado, inyección, etc (cada uno será una clase diferente).
+El factory Method utilizada una Facade para la creación de coches, donde cada una está compuesto por diferentes piezas como batería, motor, aire acondicionado, inyección, etc (cada uno será una clase diferente).
 
 El controlador devuelve un coche en marcha, con la batería, el motor y el aire acondicionado encendidos.
 
@@ -24,12 +24,15 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
 * Framework: Spring
 * Design Patterns: Factory y Facade
 * JavaDoc
+* Swagger
+* Postman (Pruebas de integración para testeo de la APIRest)
 * Depedencias:
   * JPA
   * Jersey (JAX-RS) para RESTful Web Services. 
   * H2 Database
   * SpringDevTools
   * SpringBootStarterTest
+  * SpringBootWeb
   * ModelMapper (conversión de entities a DTOs)
     * Versión: 3.2.2 (Octubre, 2023)
 
@@ -37,6 +40,7 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
 
 * Los DTOs son todos serializables
 * La conversión de entidad a dto ocurre en la capa controlador
+  * Se puede utilizar la librería modelMapper para establecer la conversión o, simplemente llevarla a cabo mediante los constructores de las clases.
 * Patrón Facade se encarga de crear cada uno de los componentes que conforman el objeto. Por ejemplo, del objeto coche crearía (batería, motor, aire acondicionado...)
 * Patrón Factory se encarga de crear el objeto en su totalidad. Por ejemplo, crea la entidad coche montada completamente.
 * Cuando hay una clase padre se ha de utilizar @MappedSupperClass y sólo ha de tener id la versión padre y no las subclases (h2database no lo reconoce y no funciona)
