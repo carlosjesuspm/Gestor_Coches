@@ -2,7 +2,9 @@ package com.cjpm.gestorcoches.controller;
 
 import com.cjpm.gestorcoches.dto.CocheElectricoDTO;
 import com.cjpm.gestorcoches.entities.CocheElectrico;
+import com.cjpm.gestorcoches.exception.CocheBadRequestException;
 import com.cjpm.gestorcoches.exception.CocheGlobalException;
+import com.cjpm.gestorcoches.exception.CocheNoContentException;
 import com.cjpm.gestorcoches.exception.CocheNotFoundException;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheElectricoServiceImp;
@@ -48,7 +50,7 @@ public class CocheElectricoController {
         List<CocheElectrico> listaCochesElectricos = cocheElectricoService.findAllCocheElectrico();
 
         if(listaCochesElectricos==null || listaCochesElectricos.isEmpty()){
-            throw new CocheNotFoundException("No existe contenido");
+            throw new CocheNoContentException("La lista está vacía");
         }
 
         return new ResponseEntity<>(
@@ -72,7 +74,7 @@ public class CocheElectricoController {
 
         return new ResponseEntity<>(cocheElectricoOpt
                 .map(cocheFactory::obtenerAutomovilElectrico)
-                .orElseThrow(()->new CocheNotFoundException("No encontrado el coche con el siguiente id: " + id)),
+                .orElseThrow(()->new CocheNotFoundException("No se ha encontrado el coche con el siguiente id: " + id)),
                 HttpStatus.OK);
 
     }
@@ -88,8 +90,8 @@ public class CocheElectricoController {
     public ResponseEntity<CocheElectrico> createCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO) throws ParseException {
 
         CocheElectrico cocheElectrico = dtoConverter.convertDTOToEntity(cocheElectricoDTO, CocheElectrico.class);
-        if(cocheElectrico.getIdCoche() !=0){
-            throw new IllegalArgumentException("El ID del coche eléctrico no es válido para la actualización");
+        if(cocheElectrico.getIdCoche()!=0){
+            throw new CocheGlobalException("El campo del id debe estar vacío");
         }
 
         return ResponseEntity.ok(cocheElectricoService.saveCocheElectrico(cocheElectrico));
@@ -105,7 +107,7 @@ public class CocheElectricoController {
     @PutMapping("/coches_electricos")
     public ResponseEntity<CocheElectricoDTO> updateCocheElectrico(@RequestBody CocheElectricoDTO cocheElectricoDTO){
         if(cocheElectricoDTO.getIdCoche()==0){
-            throw new CocheNotFoundException("No encontrado el coche con el siguiente id: " + cocheElectricoDTO.getIdCoche());
+            throw new CocheBadRequestException("No se ha podido atender la petición de actualización");
         }
 
         CocheElectrico cocheElectrico = dtoConverter.convertDTOToEntity(cocheElectricoDTO, CocheElectrico.class);
@@ -125,9 +127,9 @@ public class CocheElectricoController {
     public ResponseEntity<HttpStatus> deleteCocheElectrico(@PathVariable Long id){
         boolean result= cocheElectricoService.deleteCocheElectricoById(id);
         if(result){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            throw new CocheNoContentException("Se ha borrado correctamente el coche con el id: " + id);
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new CocheNotFoundException("No se ha encontrado el coche con el id: " + id);
     }
 
     /**
@@ -138,9 +140,9 @@ public class CocheElectricoController {
     public ResponseEntity<HttpStatus>deleteAllCocheElectrico(){
         boolean result= cocheElectricoService.deleteAllCocheElectrico();
         if(result){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            throw new CocheNoContentException("La lista se ha borrado correctamente");
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new CocheGlobalException("Error al borrar todos los coches");
     }
 
 }

@@ -21,15 +21,15 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(CocheNoContentException.class)
-    public ResponseEntity<MensajeErrorCoche> cocheNoContentException(CocheNoContentException ex, WebRequest request){
+    @ExceptionHandler(CocheBadRequestException.class)
+    public ResponseEntity<MensajeErrorCoche> cocheBadRequestException(CocheBadRequestException ex, WebRequest request){
         MensajeErrorCoche mensajeErrorPersonalizado = new MensajeErrorCoche(
-                HttpStatus.NO_CONTENT.value(),
+                HttpStatus.BAD_REQUEST.value(),
                 new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
 
-        return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.BAD_REQUEST);
     }
 
 
@@ -42,5 +42,16 @@ public class ControllerExceptionHandler {
                 ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(CocheNoContentException.class)
+    public ResponseEntity<MensajeErrorCoche> cocheNoContentException(CocheNoContentException ex, WebRequest request){
+        MensajeErrorCoche mensajeErrorPersonalizado = new MensajeErrorCoche(
+                HttpStatus.NO_CONTENT.value(),
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.NO_CONTENT);
     }
 }

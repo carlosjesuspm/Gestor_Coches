@@ -2,6 +2,7 @@ package com.cjpm.gestorcoches.controller;
 
 import com.cjpm.gestorcoches.dto.CocheHibridoDTO;
 import com.cjpm.gestorcoches.entities.CocheHibrido;
+import com.cjpm.gestorcoches.exception.CocheBadRequestException;
 import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.services.CocheHibridoServiceImp;
 import com.cjpm.gestorcoches.config.DTOConverter;
@@ -78,10 +79,9 @@ public class CocheHibridoController {
     public ResponseEntity<CocheHibrido> createCocheHibrido(@RequestBody CocheHibridoDTO cocheHibridoDTO) throws ParseException{
         CocheHibrido cocheHibrido= dtoConverter.convertDTOToEntity(cocheHibridoDTO, CocheHibrido.class);
         if(cocheHibrido.getIdCoche()!=0) {
-            throw new IllegalArgumentException("El id de este coche híbrido ya está empleado");
+            throw new CocheBadRequestException("Debe evitar añadir el campo id a la hora de guardar el nuevo coche");
         }
         return ResponseEntity.ok(cocheHibridoService.saveCocheHibrido(cocheHibrido));
-
     }
 
 

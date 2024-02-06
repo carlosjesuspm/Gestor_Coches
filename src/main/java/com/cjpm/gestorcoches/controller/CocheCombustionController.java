@@ -76,7 +76,7 @@ public class CocheCombustionController {
     @PostMapping("/coches_combustion")
     public ResponseEntity<CocheCombustion> createCocheCombustion(@RequestBody CocheCombustionDTO cocheCombustionDTO) throws ParseException {
         CocheCombustion cocheCombustion=dtoConverter.convertDTOToEntity(cocheCombustionDTO, CocheCombustion.class);
-        if(cocheCombustion.getIdCoche()!=0){
+        if(cocheCombustion.getIdCoche()==0){
             throw new IllegalArgumentException("El ID del coche de combustión no es válido");
         }
 

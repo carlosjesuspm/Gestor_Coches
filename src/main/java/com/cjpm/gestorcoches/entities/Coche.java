@@ -1,5 +1,7 @@
 package com.cjpm.gestorcoches.entities;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Tabla Coche
@@ -13,18 +15,28 @@ public abstract class Coche{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
+    @NotNull
     protected long idCoche;
     @Column(name = "marca")
+    @NotNull
+    @NotEmpty
     protected String marca;
     @Column(name = "modelo")
+    @NotNull
+    @NotEmpty
     protected String modelo;
     @Column(name = "color")
+    @NotNull
+    @NotEmpty
     protected String color;
     @Column(name = "aire_acondicionado_encendido")
+    @NotNull
     protected boolean aireAcondicionadoEncendido;
     @Column(name = "motor_encendido")
+    @NotNull
     protected boolean motorEncendido;
     @Column(name = "bateria_encendida")
+    @NotNull
     protected boolean bateriaEncendida;
 
     //Constructores
