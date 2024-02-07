@@ -25,7 +25,10 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
 * Design Patterns: Factory y Facade
 * Documentación:
   * JavaDoc
-  * Swagger
+  * Swagger(OpenApi) Versión: 2.3.0
+    * Enlaces:
+      * HMTL: http://localhost:8080/swagger-ui/index.html#/
+      * JSON: http://localhost:8080/v2/api-docs
 * Testing de integración:
 * Postman
 * Depedencias:
@@ -47,4 +50,4 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
 * Patrón Factory se encarga de crear el objeto en su totalidad. Por ejemplo, crea la entidad coche montada completamente.
 * Cuando hay una clase padre se ha de utilizar @MappedSupperClass y sólo ha de tener id la versión padre y no las subclases (h2database no lo reconoce y no funciona)
 * Para evitar la duplicación de código a la hora de pasar de entidad a DTO, y viceversa, es mejor crear una clase genérica que se pueda extrapolar a las subclases
-* A la  hora de capturar el estado 204 (No content) no se registra como error personalizado, ya que no es un error.
+* El estado 204 (No content) no es considerado un error, aunque también se puede capturar. Eso sí, el mensaje aparece reflejado en la terminal, mientras que Postman no lo registra.

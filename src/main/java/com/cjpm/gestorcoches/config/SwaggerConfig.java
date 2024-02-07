@@ -1,30 +1,27 @@
 package com.cjpm.gestorcoches.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Configuración Swagger para la generación de documentación de la API REST
- *
- * HTML: http://localhost:8080/swagger-ui/index.html#/
- * JSON: http://localhost:8080/v2/api-docs
- */
-//@Configuration
-//public class SwaggerConfig {
-//
-//    @Bean
-//    public OpenAPI api(){
-//
-//        return new OpenAPI(DocumentationType.SWAGGER_2)
-//
-//
-//    }
-//
-//    private ApiInfo apiDetails(){
-//        return new ApiInfoBuilder().title("Spring Boot Gestor Coche API REST")
-//                .version("1.0").description("Gestor de Coches REST DOCS")
-//                .contact(new Contact("Carlos", "http://localhost/8080","carlos@prueba.com" ))
-//                .build();
-//    }
-//}
+
+@Configuration
+public class SwaggerConfig {
+
+    @Bean
+    public OpenAPI api(){
+
+        return new OpenAPI()
+                .info(new Info().title("Spring Boot Gestor Coche API REST")
+                        .description("Gestor de Coches REST DOCS")
+                        .version("1.0")
+                        .contact(new Contact()
+                                .name("Carlos Jesús Pérez Márquez")
+                                .email("carlos@prueba.com").url("http://localhost:8080/swagger-ui/index.html#/")));
+
+    }
+
+}
+
