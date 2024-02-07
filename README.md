@@ -30,7 +30,7 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
       * HMTL: http://localhost:8080/swagger-ui/index.html#/
       * JSON: http://localhost:8080/v2/api-docs
 * Testing de integración:
-* Postman
+  * Postman
 * Depedencias:
   * JPA
   * Jersey (JAX-RS) para RESTful Web Services. 
@@ -40,6 +40,7 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
   * SpringBootWeb
   * ModelMapper (conversión de entities a DTOs)
     * Versión: 3.2.2 (Octubre, 2023)
+  * SpringDoc-OpenApi
 
 # Aprendizaje
 
