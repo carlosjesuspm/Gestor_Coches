@@ -20,7 +20,7 @@ En caso de no existir el tipo de coche indicado en la url de la petición, el Fa
 
 * IDE: Intellij
 * Lenguaje: Java
-  * Versión: 21
+  * Versión: 17 (versión 21, actualmente no soportado por IntelliJ)
 * Framework: Spring
 * Design Patterns: Factory y Facade
 * Documentación:
