@@ -14,10 +14,8 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     //Atributos
 
-    private CocheHibridoRepository cocheHibridoRepository;
+    private final CocheHibridoRepository cocheHibridoRepository;
 
-    public CocheHibridoServiceImp() {
-    }
 
     @Autowired
     public CocheHibridoServiceImp(CocheHibridoRepository cocheHibridoRepository) {
@@ -29,7 +27,7 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     /**
      * Método encargado de crear y guardar coche híbrido
-     * @param cocheHibrido
+     * @param cocheHibrido -
      * @return CocheHibrido
      */
     public CocheHibrido saveCocheHibrido(CocheHibrido cocheHibrido) {
@@ -52,7 +50,7 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     /**
      * Método encargado de devolver un coche híbrido determinado
-     * @param id
+     * @param id -
      * @return Optional<CocheHibrido>
      */
     @Override
@@ -61,7 +59,7 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
         if(id==null || id<=0){
             return Optional.empty();
         }
-        return Optional.of(cocheHibridoRepository.findById(id).get());
+        return cocheHibridoRepository.findById(id);
 
     }
 
@@ -78,7 +76,7 @@ public class CocheHibridoServiceImp implements ICocheHibridoService{
 
     /**
      * Elimina determinado coche híbrido
-     * @param id
+     * @param id -
      * @return true
      */
     @Override

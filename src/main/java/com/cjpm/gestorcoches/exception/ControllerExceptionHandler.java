@@ -10,6 +10,12 @@ import java.util.Date;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
+    /**
+     * Método encargado de capturar error NotFound
+     * @param ex -
+     * @param request -
+     * @return ResponseEntity<MensajeErrorCoche>
+     */
     @ExceptionHandler(CocheNotFoundException.class)
     public ResponseEntity<MensajeErrorCoche> cocheNotFoundException(CocheNotFoundException ex, WebRequest request){
         MensajeErrorCoche mensajeErrorPersonalizado = new MensajeErrorCoche(
@@ -21,6 +27,12 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Método encargado de capturar error BadRequest
+     * @param ex -
+     * @param request -
+     * @return ResponseEntity<MensajeErrorCoche>
+     */
     @ExceptionHandler(CocheBadRequestException.class)
     public ResponseEntity<MensajeErrorCoche> cocheBadRequestException(CocheBadRequestException ex, WebRequest request){
         MensajeErrorCoche mensajeErrorPersonalizado = new MensajeErrorCoche(
@@ -32,8 +44,12 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.BAD_REQUEST);
     }
 
-
-
+    /**
+     * Método encargado de capturar error GlobalExceptionHandler
+     * @param ex -
+     * @param request -
+     * @return ResponseEntity<MensajeErrorCoche>
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<MensajeErrorCoche> globalExceptionHandler(Exception ex, WebRequest request){
         MensajeErrorCoche mensajeErrorPersonalizado = new MensajeErrorCoche(
@@ -44,6 +60,12 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<MensajeErrorCoche>(mensajeErrorPersonalizado, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    /**
+     * Método encargado de capturar error NoContent
+     * @param ex -
+     * @param request -
+     * @return ResponseEntity<MensajeErrorCoche>
+     */
     @ExceptionHandler(CocheNoContentException.class)
     public ResponseEntity<MensajeErrorCoche> cocheNoContentException(CocheNoContentException ex, WebRequest request){
         MensajeErrorCoche mensajeErrorPersonalizado = new MensajeErrorCoche(

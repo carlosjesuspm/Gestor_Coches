@@ -2,7 +2,6 @@ package com.cjpm.gestorcoches.services;
 
 
 import com.cjpm.gestorcoches.entities.CocheElectrico;
-import com.cjpm.gestorcoches.factory.CocheFactoryImp;
 import com.cjpm.gestorcoches.repository.CocheElectricoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +14,9 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     //Atributos
 
-    private CocheElectricoRepository cocheElectricoRepository;
+    private final CocheElectricoRepository cocheElectricoRepository;
 
 
-    public CocheElectricoServiceImp() {
-    }
     @Autowired
     public CocheElectricoServiceImp(CocheElectricoRepository cocheElectricoRepository) {
         this.cocheElectricoRepository = cocheElectricoRepository;
@@ -30,7 +27,7 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     /**
      * Método encargado de crear y guardar coche eléctrico
-     * @param cocheElectrico
+     * @param cocheElectrico -
      * @return CocheElectrico
      */
     public CocheElectrico saveCocheElectrico(CocheElectrico cocheElectrico) {
@@ -51,7 +48,7 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
     // Muestra coche eléctrico determinado
     /**
      * Método encargado de devolver un coche eléctrico determinado
-     * @param id
+     * @param id -
      * @return Optional<CocheElectrico>
      */
     public Optional<CocheElectrico> findCocheElectricoById(Long id) {
@@ -78,7 +75,7 @@ public class CocheElectricoServiceImp implements ICocheElectricoService{
 
     /**
      * Elimina determinado coche eléctrico
-     * @param id
+     * @param id -
      * @return true
      */
 

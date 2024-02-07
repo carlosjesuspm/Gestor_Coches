@@ -14,7 +14,7 @@ public class SwaggerConfig {
     public OpenAPI api(){
 
         return new OpenAPI()
-                .info(new Info().title("Spring Boot Gestor Coche API REST")
+                .info(new Info().title("Spring Boot Gestor Coches API REST")
                         .description("Gestor de Coches REST DOCS")
                         .version("1.0")
                         .contact(new Contact()

@@ -1,7 +1,6 @@
 package com.cjpm.gestorcoches.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 

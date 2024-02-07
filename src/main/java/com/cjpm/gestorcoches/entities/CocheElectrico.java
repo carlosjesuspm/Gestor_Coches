@@ -1,7 +1,6 @@
 package com.cjpm.gestorcoches.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -13,7 +12,7 @@ public class CocheElectrico extends Coche {
 
     @Column(name = "bateria_electrica")
     @NotNull
-    private boolean bateriaElectrica=true;
+    private boolean bateriaElectrica;
 
     public CocheElectrico() {
     }

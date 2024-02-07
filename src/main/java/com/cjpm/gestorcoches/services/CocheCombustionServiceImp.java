@@ -15,10 +15,9 @@ public class CocheCombustionServiceImp implements ICocheCombustionService{
     //Atributo
 
 
-    private CocheCombustionRepository cocheCombustionRepository;
+    private final CocheCombustionRepository cocheCombustionRepository;
 
-    public CocheCombustionServiceImp() {
-    }
+
     @Autowired
     public CocheCombustionServiceImp(CocheCombustionRepository cocheCombustionRepository) {
         this.cocheCombustionRepository = cocheCombustionRepository;
@@ -52,7 +51,7 @@ public class CocheCombustionServiceImp implements ICocheCombustionService{
     /**
      * Método encargado de devolver un coche de combustión determinado
      * @param id - id del coche de combustión
-     * @return
+     * @return Optional<CocheCombustion>
      */
     @Override
     public Optional<CocheCombustion> findCocheCombustionById(Long id) {
@@ -60,7 +59,7 @@ public class CocheCombustionServiceImp implements ICocheCombustionService{
         if(id==null || id<=0){
             return Optional.empty();
         }
-        return Optional.of(cocheCombustionRepository.findById(id).get());
+        return cocheCombustionRepository.findById(id);
 
     }
 

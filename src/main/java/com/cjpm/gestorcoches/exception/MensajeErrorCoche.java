@@ -8,8 +8,7 @@ public class MensajeErrorCoche {
     private String mensaje;
     private String descripcionError;
 
-    public MensajeErrorCoche() {
-    }
+
 
     public MensajeErrorCoche(int statusCode, Date timeStamp, String mensaje, String descripcionError) {
         this.statusCode = statusCode;
